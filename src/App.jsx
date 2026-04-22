@@ -5,8 +5,6 @@ import './App.css';
 
 // --- CONFIG ---
 const WEDDING_DATE = new Date('2026-05-10T16:00:00');
-// Please ensure this ID is correct for your Formspree form
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/mqaebrjr"; 
 
 // --- COMPONENTS ---
 
@@ -178,7 +176,7 @@ const Page3 = ({ onNext }) => (
       <div className="map-placeholder">
         <iframe 
           title="Location Map"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3917.634853456071!2d75.93502167504386!3d10.91533048924203!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba7b185abdf736b%3A0xbbdee7e267492d35!2sKUNHIMMU%20AUDITORIUM!5e0!3m2!1sen!2sin!4v1776501324162!5e0!3m2!1sen!2sin!4v1776501324162" 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3917.634853456071!2d75.93502167504386!3d10.91533048924203!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba7b185abdf736b%3A0xbbdee7e267492d35!2sKUNHIMMU%20AUDITORIUM!5e0!3m2!1sen!2sin" 
           width="100%" 
           height="150" 
           style={{ border: 0, borderRadius: '15px' }} 
@@ -195,35 +193,12 @@ const Page3 = ({ onNext }) => (
 );
 
 const Page4 = () => {
-  const [status, setStatus] = useState('idle'); // idle, submitting, success, error
+  const [submitted, setSubmitted] = useState(false);
   const [choice, setChoice] = useState(null);
 
-  const handleRSVP = async (attending) => {
+  const handleRSVP = (attending) => {
     setChoice(attending);
-    setStatus('submitting');
-    
-    // Create FormData for better Formspree compatibility
-    const formData = new FormData();
-    formData.append("Attendance", attending === 'yes' ? 'Will Attend' : 'Will Not Attend');
-
-    try {
-      const res = await fetch(FORMSPREE_ENDPOINT, {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
-      });
-      
-      if (res.ok) {
-        setStatus('success');
-      } else {
-        setStatus('error');
-      }
-    } catch (err) {
-      console.error("RSVP Error:", err);
-      setStatus('error');
-    }
+    setSubmitted(true);
   };
 
   return (
@@ -233,7 +208,7 @@ const Page4 = () => {
       className="page-container"
     >
       <div className="glass-card">
-        {status === 'success' ? (
+        {submitted ? (
           <div style={{ textAlign: 'center' }}>
             <div className="success-icon"><Check size={40} color="white" /></div>
             <h2 className="cursive" style={{ fontSize: '2.5rem' }}>{choice === 'yes' ? 'Great!' : 'Thank You'}</h2>
@@ -246,27 +221,13 @@ const Page4 = () => {
           <>
             <h2 style={{ marginBottom: '2rem' }}>Will you join us?</h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              <button 
-                className="btn-rsvp yes" 
-                disabled={status === 'submitting'}
-                onClick={() => handleRSVP('yes')}
-              >
-                {status === 'submitting' && choice === 'yes' ? 'Sending...' : '💖 Yes, I will attend'}
+              <button className="btn-rsvp yes" onClick={() => handleRSVP('yes')}>
+                💖 Yes, I will attend
               </button>
-              <button 
-                className="btn-rsvp no" 
-                disabled={status === 'submitting'}
-                onClick={() => handleRSVP('no')}
-              >
-                {status === 'submitting' && choice === 'no' ? 'Sending...' : '🌿 Sorry, I can’t attend'}
+              <button className="btn-rsvp no" onClick={() => handleRSVP('no')}>
+                🌿 Sorry, I can’t attend
               </button>
             </div>
-            {status === 'error' && (
-              <p style={{ color: '#d32f2f', marginTop: '1.5rem', fontSize: '0.9rem' }}>
-                Oops! Something went wrong.<br/>
-                Please try again or check your internet connection.
-              </p>
-            )}
           </>
         )}
       </div>
