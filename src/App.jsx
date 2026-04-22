@@ -148,7 +148,7 @@ const Page2 = ({ onNext }) => (
   </motion.div>
 );
 
-const Page3 = () => (
+const Page3 = ({ onNext }) => (
   <motion.div
     initial={{ opacity: 0, x: 50 }}
     animate={{ opacity: 1, x: 0 }}
@@ -185,13 +185,54 @@ const Page3 = () => (
         ></iframe>
       </div>
 
-      <div style={{ marginTop: '2rem', fontSize: '0.9rem', opacity: 0.6 }}>
-        Thank you for your love and blessings!<br/>
-        With love, Vellathur Family
-      </div>
+      <button className="btn-primary" onClick={onNext}>
+        👉 Continue
+      </button>
     </div>
   </motion.div>
 );
+
+const Page4 = () => {
+  const [rsvp, setRsvp] = useState(null);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="page-container"
+    >
+      <div className="glass-card">
+        <h2 style={{ marginBottom: '2rem' }}>Will you join us?</h2>
+        
+        {rsvp === null ? (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <button 
+              className="btn-rsvp yes"
+              onClick={() => setRsvp('yes')}
+            >
+              💖 Yes, I will attend
+            </button>
+            <button 
+              className="btn-rsvp no"
+              onClick={() => setRsvp('no')}
+            >
+              🌿 Sorry, I can’t attend
+            </button>
+          </div>
+        ) : (
+          <div style={{ textAlign: 'center' }}>
+            <div className="success-icon"><Check size={40} color="white" /></div>
+            <h2 className="cursive" style={{ fontSize: '2.5rem' }}>{rsvp === 'yes' ? 'Great!' : 'Thank You'}</h2>
+            <p>{rsvp === 'yes' ? 'We are so happy to hear that! 💖' : 'Thank you for letting us know 💕'}</p>
+            <div style={{ marginTop: '3rem', fontSize: '0.9rem', opacity: 0.6 }}>
+               With love, Vellathur Family
+            </div>
+          </div>
+        )}
+      </div>
+    </motion.div>
+  );
+};
 
 // --- MAIN APP ---
 
@@ -205,11 +246,12 @@ export default function App() {
       <AnimatePresence mode="wait">
         {page === 1 && <Page1 key="page1" onNext={() => setPage(2)} />}
         {page === 2 && <Page2 key="page2" onNext={() => setPage(3)} />}
-        {page === 3 && <Page3 key="page3" />}
+        {page === 3 && <Page3 key="page3" onNext={() => setPage(4)} />}
+        {page === 4 && <Page4 key="page4" />}
       </AnimatePresence>
 
       <div className="page-indicator">
-        {[1, 2, 3].map(p => (
+        {[1, 2, 3, 4].map(p => (
           <div 
             key={p} 
             className={`indicator-dot ${page === p ? 'active' : ''}`}
