@@ -61,11 +61,34 @@ h1, h2, h3 {
   flex-direction: column;
   overflow: hidden;
   background-color: var(--cream);
+  /* Luxury Vignette Effect */
+  box-shadow: inset 0 0 120px rgba(0, 0, 0, 0.03),
+              inset 0 0 250px rgba(0, 0, 0, 0.02);
+}
+
+/* Luxury Illustration Layer */
+.app-container::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 55%;
+  height: 55%;
   background-image: url('/assets/wedding-illustration.png');
-  background-size: 45%;
-  background-position: right bottom;
-  background-attachment: fixed;
+  background-size: contain;
+  background-position: bottom right;
   background-repeat: no-repeat;
+  opacity: 0.8;
+  mix-blend-mode: multiply;
+  z-index: 1;
+  pointer-events: none;
+  /* Premium Soft Fade Mask */
+  mask-image: linear-gradient(to top, black 80%, transparent), 
+              linear-gradient(to left, black 80%, transparent);
+  mask-composite: intersect;
+  -webkit-mask-image: linear-gradient(to top, black 80%, transparent), 
+                      linear-gradient(to left, black 80%, transparent);
+  -webkit-mask-composite: source-in;
 }
 
 .page-container {
@@ -76,6 +99,7 @@ h1, h2, h3 {
   padding: 2rem;
   z-index: 10;
   width: 100%;
+  position: relative;
 }
 
 .glass-card {
@@ -90,7 +114,7 @@ h1, h2, h3 {
   width: 100%;
   text-align: center;
   position: relative;
-  z-index: 20;
+  z-index: 20; /* Layered above the illustration */
 }
 
 .btn-primary {
@@ -247,14 +271,19 @@ h1, h2, h3 {
 }
 
 @media (max-width: 600px) {
-  .app-container {
-    background-size: 60%;
-    background-position: right bottom;
+  .app-container::after {
+    width: 75%;
+    height: 45%;
+    opacity: 0.75;
+    bottom: 0;
+    right: 0;
+    -webkit-mask-image: linear-gradient(to top, black 75%, transparent), 
+                        linear-gradient(to left, black 75%, transparent);
   }
   .page-container {
     padding: 1rem;
-    align-items: flex-start; /* Move card up slightly to avoid covering illustration */
-    padding-top: 3rem;
+    align-items: flex-start;
+    padding-top: 3.5rem;
   }
   .glass-card {
     padding: 2.5rem 1.2rem;
