@@ -105,38 +105,36 @@ const Countdown = () => {
 
 // --- PAGES ---
 
-const Page1 = ({ onNext }) => (
+const LandingPage = ({ onNext }) => (
   <motion.div
     variants={containerVariants}
     initial="hidden"
     animate="visible"
     exit="exit"
-    className="page-container"
+    className="landing-page"
   >
-    <Bismillah />
+    <motion.div variants={itemVariants} className="bismillah-landing">
+      ﷽
+    </motion.div>
     
-    <motion.p variants={itemVariants} className="invitation-text">
-      Mr. & Mrs. request the pleasure of your company<br/>
-      at the Marriage of their son
-    </motion.p>
+    <motion.div variants={itemVariants} className="monogram-landing">
+      S & R
+    </motion.div>
     
-    <motion.h1 variants={itemVariants} className="couple-names">
+    <motion.h1 variants={itemVariants} className="names-landing">
       Sanad & Rafna
     </motion.h1>
     
-    <motion.div variants={itemVariants} style={{ margin: '2.5rem 0' }}>
-      <p className="detail-text" style={{ marginBottom: '0.8rem' }}>The Nikah, Insha'Allah, will be solemnized on</p>
-      <p className="date-text">FRIDAY | 14 | AUGUST</p>
+    <motion.div variants={itemVariants} className="event-landing">
+      Wedding Invitation
     </motion.div>
-
-    <Countdown />
 
     <motion.button 
       variants={itemVariants} 
-      className="btn-plaque" 
+      className="btn-open-landing" 
       onClick={onNext}
     >
-      Open Invitation
+      OPEN INVITATION
     </motion.button>
   </motion.div>
 );
@@ -313,29 +311,34 @@ export default function App() {
     <div className="app-container">
       <audio ref={audioRef} src="/wedding-nasheed.mp3" loop />
       
-      <ArchFrame />
-      <HangingLanterns />
-      
-      <button className="mute-toggle" onClick={toggleMute}>
-        {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
-      </button>
+      {page > 1 && (
+        <>
+          <ArchFrame />
+          <HangingLanterns />
+          <button className="mute-toggle" onClick={toggleMute}>
+            {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
+          </button>
+        </>
+      )}
 
       <AnimatePresence mode="wait">
-        {page === 1 && <Page1 key="page1" onNext={handleNext} />}
+        {page === 1 && <LandingPage key="landing" onNext={handleNext} />}
         {page === 2 && <Page2 key="page2" onNext={handleNext} />}
         {page === 3 && <Page3 key="page3" onNext={handleNext} />}
         {page === 4 && <Page4 key="page4" />}
       </AnimatePresence>
 
-      <div className="page-indicator">
-        {[1, 2, 3, 4].map(p => (
-          <div 
-            key={p} 
-            className={`indicator-dot ${page === p ? 'active' : ''}`}
-            onClick={() => setPage(p)}
-          />
-        ))}
-      </div>
+      {page > 1 && (
+        <div className="page-indicator">
+          {[1, 2, 3, 4].map(p => (
+            <div 
+              key={p} 
+              className={`indicator-dot ${page === p ? 'active' : ''}`}
+              onClick={() => setPage(p)}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
