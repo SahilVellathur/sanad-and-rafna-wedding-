@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MapPin, Calendar, Clock, Check, Volume2, VolumeX, Send } from 'lucide-react';
+import { MapPin, Calendar, Clock, Check, Volume2, VolumeX } from 'lucide-react';
 import './App.css';
 
 // --- CONFIG ---
@@ -194,18 +194,17 @@ const Page3 = ({ onNext }) => (
 );
 
 const Page4 = () => {
-  const [rsvp, setRsvp] = useState(null);
-  const [name, setName] = useState('');
-  const [status, setStatus] = useState('idle');
+  const [status, setStatus] = useState('idle'); // idle, submitting, success, error
+  const [choice, setChoice] = useState(null);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleRSVP = async (attending) => {
+    setChoice(attending);
     setStatus('submitting');
     try {
       const res = await fetch(FORMSPREE_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, attending: rsvp === 'yes' ? 'Yes' : 'No' })
+        body: JSON.stringify({ attending: attending === 'yes' ? 'Yes' : 'No' })
       });
       if (res.ok) setStatus('success');
       else setStatus('error');
@@ -224,8 +223,8 @@ const Page4 = () => {
         {status === 'success' ? (
           <div style={{ textAlign: 'center' }}>
             <div className="success-icon"><Check size={40} color="white" /></div>
-            <h2 className="cursive" style={{ fontSize: '2.5rem' }}>Thank You!</h2>
-            <p>Your response has been recorded.</p>
+            <h2 className="cursive" style={{ fontSize: '2.5rem' }}>{choice === 'yes' ? 'Great!' : 'Thank You'}</h2>
+            <p>{choice === 'yes' ? 'We are so happy to hear that! 💖' : 'Thank you for letting us know 💕'}</p>
             <div style={{ marginTop: '3rem', fontSize: '0.9rem', opacity: 0.6 }}>
                With love, Vellathur Family
             </div>
@@ -233,30 +232,23 @@ const Page4 = () => {
         ) : (
           <>
             <h2 style={{ marginBottom: '2rem' }}>Will you join us?</h2>
-            {rsvp === null ? (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                <button className="btn-rsvp yes" onClick={() => setRsvp('yes')}>💖 Yes, I will attend</button>
-                <button className="btn-rsvp no" onClick={() => setRsvp('no')}>🌿 Sorry, I can’t attend</button>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="rsvp-form">
-                <p style={{ marginBottom: '1rem', opacity: 0.8 }}>
-                  {rsvp === 'yes' ? "We're so happy! Please enter your name:" : "We'll miss you. Please enter your name:"}
-                </p>
-                <input 
-                  type="text" 
-                  placeholder="Your Name" 
-                  required 
-                  className="input-field"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                />
-                <button type="submit" className="btn-primary" disabled={status === 'submitting'}>
-                  {status === 'submitting' ? 'Sending...' : 'Submit RSVP'}
-                </button>
-                {status === 'error' && <p style={{ color: 'red', marginTop: '1rem' }}>Something went wrong. Try again.</p>}
-              </form>
-            )}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <button 
+                className="btn-rsvp yes" 
+                disabled={status === 'submitting'}
+                onClick={() => handleRSVP('yes')}
+              >
+                {status === 'submitting' && choice === 'yes' ? 'Sending...' : '💖 Yes, I will attend'}
+              </button>
+              <button 
+                className="btn-rsvp no" 
+                disabled={status === 'submitting'}
+                onClick={() => handleRSVP('no')}
+              >
+                {status === 'submitting' && choice === 'no' ? 'Sending...' : '🌿 Sorry, I can’t attend'}
+              </button>
+            </div>
+            {status === 'error' && <p style={{ color: 'red', marginTop: '1rem' }}>Something went wrong. Please try again.</p>}
           </>
         )}
       </div>
