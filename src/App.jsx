@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MapPin, Calendar, Clock, Volume2, VolumeX } from 'lucide-react';
+import { MapPin, Calendar, Clock, Check, Volume2, VolumeX, Send } from 'lucide-react';
 import './App.css';
 
 // --- CONFIG ---
 const WEDDING_DATE = new Date('2026-05-10T16:00:00');
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/mqaebrjr"; 
 
 // --- COMPONENTS ---
 
@@ -148,7 +149,7 @@ const Page2 = ({ onNext }) => (
   </motion.div>
 );
 
-const Page3 = () => (
+const Page3 = ({ onNext }) => (
   <motion.div
     initial={{ opacity: 0, x: 50 }}
     animate={{ opacity: 1, x: 0 }}
@@ -185,13 +186,83 @@ const Page3 = () => (
         ></iframe>
       </div>
 
-      <div style={{ marginTop: '2rem', fontSize: '0.9rem', opacity: 0.6 }}>
-        Thank you for your love and blessings!<br/>
-        With love, Vellathur Family
-      </div>
+      <button className="btn-primary" onClick={onNext}>
+        👉 Continue
+      </button>
     </div>
   </motion.div>
 );
+
+const Page4 = () => {
+  const [rsvp, setRsvp] = useState(null);
+  const [name, setName] = useState('');
+  const [status, setStatus] = useState('idle');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus('submitting');
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, attending: rsvp === 'yes' ? 'Yes' : 'No' })
+      });
+      if (res.ok) setStatus('success');
+      else setStatus('error');
+    } catch {
+      setStatus('error');
+    }
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="page-container"
+    >
+      <div className="glass-card">
+        {status === 'success' ? (
+          <div style={{ textAlign: 'center' }}>
+            <div className="success-icon"><Check size={40} color="white" /></div>
+            <h2 className="cursive" style={{ fontSize: '2.5rem' }}>Thank You!</h2>
+            <p>Your response has been recorded.</p>
+            <div style={{ marginTop: '3rem', fontSize: '0.9rem', opacity: 0.6 }}>
+               With love, Vellathur Family
+            </div>
+          </div>
+        ) : (
+          <>
+            <h2 style={{ marginBottom: '2rem' }}>Will you join us?</h2>
+            {rsvp === null ? (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                <button className="btn-rsvp yes" onClick={() => setRsvp('yes')}>💖 Yes, I will attend</button>
+                <button className="btn-rsvp no" onClick={() => setRsvp('no')}>🌿 Sorry, I can’t attend</button>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="rsvp-form">
+                <p style={{ marginBottom: '1rem', opacity: 0.8 }}>
+                  {rsvp === 'yes' ? "We're so happy! Please enter your name:" : "We'll miss you. Please enter your name:"}
+                </p>
+                <input 
+                  type="text" 
+                  placeholder="Your Name" 
+                  required 
+                  className="input-field"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+                <button type="submit" className="btn-primary" disabled={status === 'submitting'}>
+                  {status === 'submitting' ? 'Sending...' : 'Submit RSVP'}
+                </button>
+                {status === 'error' && <p style={{ color: 'red', marginTop: '1rem' }}>Something went wrong. Try again.</p>}
+              </form>
+            )}
+          </>
+        )}
+      </div>
+    </motion.div>
+  );
+};
 
 // --- MAIN APP ---
 
@@ -228,10 +299,11 @@ export default function App() {
       <AnimatePresence mode="wait">
         {page === 1 && <Page1 key="page1" onNext={handleNext} />}
         {page === 2 && <Page2 key="page2" onNext={handleNext} />}
-        {page === 3 && <Page3 key="page3" />}
+        {page === 3 && <Page3 key="page3" onNext={handleNext} />}
+        {page === 4 && <Page4 key="page4" />}
       </AnimatePresence>
       <div className="page-indicator">
-        {[1, 2, 3].map(p => (
+        {[1, 2, 3, 4].map(p => (
           <div key={p} className={`indicator-dot ${page === p ? 'active' : ''}`} onClick={() => setPage(p)} />
         ))}
       </div>
