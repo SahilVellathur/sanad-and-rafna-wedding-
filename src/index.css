@@ -1,0 +1,165 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+
+:root {
+  --soft-pink: #FCE4EC;
+  --cream: #FFF9F0;
+  --light-peach: #FFF0E0;
+  --white: #FFFFFF;
+  --accent-pink: #F8BBD0;
+  --text-main: #5D4037;
+  --text-soft: #8D6E63;
+  --font-cursive: 'Great Vibes', cursive;
+  --font-serif: 'Playfair Display', serif;
+  --font-sans: 'Inter', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background-color: var(--cream);
+  color: var(--text-main);
+  min-height: 100vh;
+  width: 100vw;
+  user-select: none;
+  overflow-x: hidden;
+}
+
+@media (min-width: 768px) {
+  body {
+    overflow: hidden;
+  }
+}
+
+#root {
+  height: 100%;
+}
+
+.app-container {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-image: url('/assets/bg.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.page-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+  z-index: 10;
+}
+
+@media (max-width: 480px) {
+  .page-container {
+    padding: 1rem;
+  }
+}
+
+h1, h2, h3 {
+  font-family: var(--font-serif);
+}
+
+.cursive {
+  font-family: var(--font-cursive);
+  font-size: 3.5rem;
+  color: var(--accent-pink);
+  margin-bottom: 0.5rem;
+}
+
+.btn-primary {
+  background: var(--white);
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  color: var(--text-main);
+  box-shadow: 0 4px 15px rgba(248, 187, 208, 0.3);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin-top: 2rem;
+  font-size: 1.1rem;
+}
+
+.btn-primary:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 8px rgba(248, 187, 208, 0.2);
+}
+
+/* Petals Animation */
+.petal {
+  position: absolute;
+  top: -10%;
+  z-index: 5;
+  pointer-events: none;
+  width: 20px;
+  height: 20px;
+  background-image: url('/assets/petal.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.6;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Card Styles */
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 30px;
+  padding: 2.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  max-width: 90%;
+  width: 400px;
+  margin: auto;
+}
+
+/* Countdown Styles */
+.countdown-container {
+  display: flex;
+  gap: 1rem;
+  margin: 1.5rem 0;
+  justify-content: center;
+}
+
+.countdown-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.countdown-value {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--accent-pink);
+}
+
+.countdown-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  color: var(--text-soft);
+}
