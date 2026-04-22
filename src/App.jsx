@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MapPin, Calendar, Clock, Check } from 'lucide-react';
+import { MapPin, Calendar, Clock, Check, Volume2, VolumeX } from 'lucide-react';
 import './App.css';
 
 // --- CONFIG ---
@@ -238,15 +238,41 @@ const Page4 = () => {
 
 export default function App() {
   const [page, setPage] = useState(1);
+  const [isMuted, setIsMuted] = useState(false);
+  const audioRef = useRef(null);
+
+  const startMusic = () => {
+    if (audioRef.current) {
+      audioRef.current.play().catch(err => console.log("Audio play failed:", err));
+    }
+  };
+
+  const toggleMute = () => {
+    if (audioRef.current) {
+      audioRef.current.muted = !isMuted;
+      setIsMuted(!isMuted);
+    }
+  };
+
+  const handleNext = () => {
+    if (page === 1) startMusic();
+    setPage(prev => prev + 1);
+  };
 
   return (
     <div className="app-container">
+      <audio ref={audioRef} src="/wedding-nasheed.mp3" loop />
+      
       <FallingPetals />
       
+      <button className="mute-toggle" onClick={toggleMute}>
+        {isMuted ? <VolumeX size={24} /> : <Volume2 size={24} />}
+      </button>
+
       <AnimatePresence mode="wait">
-        {page === 1 && <Page1 key="page1" onNext={() => setPage(2)} />}
-        {page === 2 && <Page2 key="page2" onNext={() => setPage(3)} />}
-        {page === 3 && <Page3 key="page3" onNext={() => setPage(4)} />}
+        {page === 1 && <Page1 key="page1" onNext={handleNext} />}
+        {page === 2 && <Page2 key="page2" onNext={handleNext} />}
+        {page === 3 && <Page3 key="page3" onNext={handleNext} />}
         {page === 4 && <Page4 key="page4" />}
       </AnimatePresence>
 
