@@ -1,17 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Montserrat:wght@300;400;500;600&family=Pinyon+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Montserrat:wght@300;400;500;600&family=Great+Vibes&display=swap');
 
 :root {
   --cream: #faf7f2;
-  --royal-gold: #EAD7B2; /* Saturated Ivory */
-  --stroke-gold: #C5A059; /* Outline Gold */
-  --soft-gold: #f5e9d4;
+  --royal-gold: #E2C9A1; /* Bold Ivory / Antique Gold */
+  --stroke-gold: #8D734A; /* Deep Outline */
+  --soft-gold: #f3dec0;
   --text-dark: #2c2c2c;
   --glass-bg: rgba(255, 255, 255, 0.2);
-  --gold-border: rgba(197, 160, 89, 0.4);
+  --gold-border: rgba(141, 115, 74, 0.4);
   
   --font-royal: 'Playfair Display', serif;
   --font-body: 'Montserrat', sans-serif;
-  --font-script: 'Pinyon Script', cursive;
+  --font-script: 'Great Vibes', cursive;
 }
 
 * {
@@ -39,15 +39,16 @@ body {
 h1, h2, h3 {
   font-family: var(--font-royal);
   letter-spacing: 1px;
-  font-weight: 800; /* Bold Headings */
+  font-weight: 800;
 }
 
 .script-text {
   font-family: var(--font-script);
-  font-weight: 800; /* Bold S&R */
+  font-weight: 900; /* Ultra-Bold */
   color: var(--royal-gold);
-  -webkit-text-stroke: 0.5px var(--stroke-gold);
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  -webkit-text-stroke: 1px var(--stroke-gold);
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+  font-size: 5.5rem;
 }
 
 .app-container {
@@ -101,14 +102,14 @@ h1, h2, h3 {
   font-weight: 800;
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  box-shadow: 0 5px 15px rgba(197, 160, 89, 0.3);
+  box-shadow: 0 5px 15px rgba(141, 115, 74, 0.3);
   letter-spacing: 2px;
   text-transform: uppercase;
 }
 
 .btn-primary:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(197, 160, 89, 0.5);
+  box-shadow: 0 8px 25px rgba(141, 115, 74, 0.5);
 }
 
 .btn-rsvp {
@@ -131,7 +132,7 @@ h1, h2, h3 {
 }
 
 .btn-rsvp.yes {
-  background: rgba(234, 215, 178, 0.2);
+  background: rgba(226, 201, 161, 0.2);
 }
 
 /* Countdown Styles */
@@ -166,6 +167,18 @@ h1, h2, h3 {
   color: var(--text-dark);
 }
 
+/* Crest Override */
+.royal-crest {
+  font-family: var(--font-script);
+  font-weight: 900;
+  color: var(--royal-gold);
+  -webkit-text-stroke: 1px var(--stroke-gold);
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+  font-size: 6rem;
+  margin-bottom: 1.5rem;
+  line-height: 1;
+}
+
 /* Mute Toggle */
 .mute-toggle {
   position: fixed;
@@ -196,7 +209,7 @@ h1, h2, h3 {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: rgba(197, 160, 89, 0.3);
+  background: rgba(141, 115, 74, 0.3);
   cursor: pointer;
   transition: all 0.3s;
 }
@@ -214,11 +227,11 @@ h1, h2, h3 {
 }
 
 @media (max-width: 600px) {
+  .royal-crest {
+    font-size: 5rem;
+  }
   .glass-card {
     padding: 2.5rem 1.5rem;
-    width: 90%;
-  }
-  .countdown-container {
-    gap: 1rem;
+    width: 95%;
   }
 }
