@@ -2,11 +2,11 @@
 
 :root {
   --cream: #faf7f2;
-  --royal-gold: #D4AF37;
-  --soft-gold: #e5c05b;
+  --royal-gold: #E1C699;
+  --soft-gold: #f0dec0;
   --text-dark: #2c2c2c;
   --glass-bg: rgba(255, 255, 255, 0.2);
-  --gold-border: rgba(212, 175, 55, 0.4);
+  --gold-border: rgba(225, 198, 153, 0.4);
   
   --font-royal: 'Playfair Display', serif;
   --font-body: 'Montserrat', sans-serif;
@@ -42,6 +42,8 @@ h1, h2, h3 {
 
 .script-text {
   font-family: var(--font-script);
+  font-weight: 500;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
 }
 
 .app-container {
@@ -92,12 +94,13 @@ h1, h2, h3 {
   border-radius: 50px;
   font-family: var(--font-royal);
   font-size: 1.1rem;
-  font-weight: 500;
+  font-weight: 700;
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+  box-shadow: 0 5px 15px rgba(225, 198, 153, 0.3);
   letter-spacing: 2px;
   text-transform: uppercase;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
 }
 
 .btn-primary:hover {
@@ -145,8 +148,9 @@ h1, h2, h3 {
 .countdown-value {
   font-family: var(--font-royal);
   font-size: 2.2rem;
-  font-weight: 600;
+  font-weight: 800;
   color: var(--royal-gold);
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
 }
 
 .countdown-label {
