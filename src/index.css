@@ -4,6 +4,7 @@
   --cream: #faf7f2;
   --royal-gold: #E2C9A1; /* Bold Ivory / Antique Gold */
   --stroke-gold: #8D734A; /* Deep Outline */
+  --royal-blue: #002366; /* Tap Feedback Color */
   --soft-gold: #f3dec0;
   --text-dark: #2c2c2c;
   --glass-bg: rgba(255, 255, 255, 0.2);
@@ -18,6 +19,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -webkit-tap-highlight-color: transparent; /* Remove default mobile tap highlight */
 }
 
 html, body {
@@ -100,15 +102,23 @@ h1, h2, h3 {
   font-size: 1.1rem;
   font-weight: 800;
   cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   box-shadow: 0 5px 15px rgba(141, 115, 74, 0.3);
   letter-spacing: 2px;
   text-transform: uppercase;
+  outline: none;
 }
 
 .btn-primary:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 25px rgba(141, 115, 74, 0.5);
+}
+
+.btn-primary:active, .btn-primary:focus {
+  background: var(--royal-blue) !important;
+  color: white !important;
+  box-shadow: 0 0 20px var(--royal-blue) !important;
+  transform: scale(0.95);
 }
 
 .btn-rsvp {
@@ -122,12 +132,21 @@ h1, h2, h3 {
   cursor: pointer;
   transition: all 0.3s;
   color: var(--text-dark);
+  outline: none;
 }
 
 .btn-rsvp:hover {
   background: white;
   transform: scale(1.02);
   border-color: var(--stroke-gold);
+}
+
+.btn-rsvp:active, .btn-rsvp:focus {
+  background: var(--royal-blue) !important;
+  color: white !important;
+  box-shadow: 0 0 20px var(--royal-blue) !important;
+  transform: scale(0.95);
+  border-color: var(--royal-blue);
 }
 
 .btn-rsvp.yes {
