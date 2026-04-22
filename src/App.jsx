@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MapPin, Calendar, Clock, Check, Volume2, VolumeX } from 'lucide-react';
+import { MapPin, Calendar, Clock, Check, Volume2, VolumeX, Send } from 'lucide-react';
 import './App.css';
 
 // --- CONFIG ---
 const WEDDING_DATE = new Date('2026-05-10T16:00:00');
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/mqaebrjr"; 
 
 // --- COMPONENTS ---
 
@@ -194,6 +195,24 @@ const Page3 = ({ onNext }) => (
 
 const Page4 = () => {
   const [rsvp, setRsvp] = useState(null);
+  const [name, setName] = useState('');
+  const [status, setStatus] = useState('idle');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus('submitting');
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, attending: rsvp === 'yes' ? 'Yes' : 'No' })
+      });
+      if (res.ok) setStatus('success');
+      else setStatus('error');
+    } catch {
+      setStatus('error');
+    }
+  };
 
   return (
     <motion.div
@@ -202,32 +221,43 @@ const Page4 = () => {
       className="page-container"
     >
       <div className="glass-card">
-        <h2 style={{ marginBottom: '2rem' }}>Will you join us?</h2>
-        
-        {rsvp === null ? (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            <button 
-              className="btn-rsvp yes"
-              onClick={() => setRsvp('yes')}
-            >
-              💖 Yes, I will attend
-            </button>
-            <button 
-              className="btn-rsvp no"
-              onClick={() => setRsvp('no')}
-            >
-              🌿 Sorry, I can’t attend
-            </button>
-          </div>
-        ) : (
+        {status === 'success' ? (
           <div style={{ textAlign: 'center' }}>
             <div className="success-icon"><Check size={40} color="white" /></div>
-            <h2 className="cursive" style={{ fontSize: '2.5rem' }}>{rsvp === 'yes' ? 'Great!' : 'Thank You'}</h2>
-            <p>{rsvp === 'yes' ? 'We are so happy to hear that! 💖' : 'Thank you for letting us know 💕'}</p>
+            <h2 className="cursive" style={{ fontSize: '2.5rem' }}>Thank You!</h2>
+            <p>Your response has been recorded.</p>
             <div style={{ marginTop: '3rem', fontSize: '0.9rem', opacity: 0.6 }}>
                With love, Vellathur Family
             </div>
           </div>
+        ) : (
+          <>
+            <h2 style={{ marginBottom: '2rem' }}>Will you join us?</h2>
+            {rsvp === null ? (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                <button className="btn-rsvp yes" onClick={() => setRsvp('yes')}>💖 Yes, I will attend</button>
+                <button className="btn-rsvp no" onClick={() => setRsvp('no')}>🌿 Sorry, I can’t attend</button>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="rsvp-form">
+                <p style={{ marginBottom: '1rem', opacity: 0.8 }}>
+                  {rsvp === 'yes' ? "We're so happy! Please enter your name:" : "We'll miss you. Please enter your name:"}
+                </p>
+                <input 
+                  type="text" 
+                  placeholder="Your Name" 
+                  required 
+                  className="input-field"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+                <button type="submit" className="btn-primary" disabled={status === 'submitting'}>
+                  {status === 'submitting' ? 'Sending...' : 'Submit RSVP'}
+                </button>
+                {status === 'error' && <p style={{ color: 'red', marginTop: '1rem' }}>Something went wrong. Try again.</p>}
+              </form>
+            )}
+          </>
         )}
       </div>
     </motion.div>
@@ -262,27 +292,19 @@ export default function App() {
   return (
     <div className="app-container">
       <audio ref={audioRef} src="/wedding-nasheed.mp3" loop />
-      
       <FallingPetals />
-      
       <button className="mute-toggle" onClick={toggleMute}>
         {isMuted ? <VolumeX size={24} /> : <Volume2 size={24} />}
       </button>
-
       <AnimatePresence mode="wait">
         {page === 1 && <Page1 key="page1" onNext={handleNext} />}
         {page === 2 && <Page2 key="page2" onNext={handleNext} />}
         {page === 3 && <Page3 key="page3" onNext={handleNext} />}
         {page === 4 && <Page4 key="page4" />}
       </AnimatePresence>
-
       <div className="page-indicator">
         {[1, 2, 3, 4].map(p => (
-          <div 
-            key={p} 
-            className={`indicator-dot ${page === p ? 'active' : ''}`}
-            onClick={() => setPage(p)}
-          />
+          <div key={p} className={`indicator-dot ${page === p ? 'active' : ''}`} onClick={() => setPage(p)} />
         ))}
       </div>
     </div>
