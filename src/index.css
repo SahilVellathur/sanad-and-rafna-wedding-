@@ -4,8 +4,8 @@
   --cream: #faf7f2;
   --royal-gold: #E2C9A1; /* Bold Ivory / Antique Gold */
   --stroke-gold: #8D734A; /* Deep Outline */
-  --royal-blue: #002366; /* Tap Feedback Color */
   --soft-gold: #f3dec0;
+  --feedback-cream: #FFFDD0; /* Brighter Ivory Feedback */
   --text-dark: #2c2c2c;
   --glass-bg: rgba(255, 255, 255, 0.2);
   --gold-border: rgba(141, 115, 74, 0.4);
@@ -102,7 +102,7 @@ h1, h2, h3 {
   font-size: 1.1rem;
   font-weight: 800;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 0.2s ease-in-out;
   box-shadow: 0 5px 15px rgba(141, 115, 74, 0.3);
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -115,10 +115,10 @@ h1, h2, h3 {
 }
 
 .btn-primary:active, .btn-primary:focus {
-  background: var(--royal-blue) !important;
-  color: white !important;
-  box-shadow: 0 0 20px var(--royal-blue) !important;
-  transform: scale(0.95);
+  background: var(--feedback-cream) !important;
+  color: var(--text-dark) !important;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.6) !important;
+  transform: scale(0.96);
 }
 
 .btn-rsvp {
@@ -130,7 +130,7 @@ h1, h2, h3 {
   font-size: 1.1rem;
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.2s ease-in-out;
   color: var(--text-dark);
   outline: none;
 }
@@ -142,11 +142,11 @@ h1, h2, h3 {
 }
 
 .btn-rsvp:active, .btn-rsvp:focus {
-  background: var(--royal-blue) !important;
-  color: white !important;
-  box-shadow: 0 0 20px var(--royal-blue) !important;
-  transform: scale(0.95);
-  border-color: var(--royal-blue);
+  background: var(--feedback-cream) !important;
+  color: var(--text-dark) !important;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.6) !important;
+  transform: scale(0.96);
+  border-color: var(--stroke-gold);
 }
 
 .btn-rsvp.yes {
