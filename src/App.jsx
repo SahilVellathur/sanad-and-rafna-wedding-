@@ -118,13 +118,13 @@ const Page1 = ({ onNext }) => (
     className="page-container"
   >
     <div className="glass-card">
-      <motion.h2 variants={itemVariants} className="script-text" style={{ fontSize: '5rem', marginBottom: '1rem', color: 'var(--royal-gold)' }}>S & R</motion.h2>
-      <motion.h1 variants={itemVariants} style={{ fontSize: '2.5rem', fontWeight: '400' }}>SANAD</motion.h1>
-      <motion.p variants={itemVariants} className="script-text" style={{ fontSize: '2rem', margin: '0.5rem 0', opacity: 0.6 }}>and</motion.p>
-      <motion.h1 variants={itemVariants} style={{ fontSize: '2.5rem', fontWeight: '400' }}>RAFNA</motion.h1>
+      <motion.h2 variants={itemVariants} className="script-text" style={{ fontSize: '5.5rem', marginBottom: '1rem' }}>S & R</motion.h2>
+      <motion.h1 variants={itemVariants} style={{ fontSize: '2.8rem' }}>SANAD</motion.h1>
+      <motion.p variants={itemVariants} style={{ fontSize: '1.2rem', margin: '0.5rem 0', opacity: 0.8, fontStyle: 'italic' }}>and</motion.p>
+      <motion.h1 variants={itemVariants} style={{ fontSize: '2.8rem' }}>RAFNA</motion.h1>
       
-      <motion.div variants={itemVariants} style={{ margin: '2.5rem 0', borderTop: '1px solid var(--gold-border)', paddingTop: '1.5rem' }}>
-        <p style={{ textTransform: 'uppercase', letterSpacing: '5px', fontSize: '0.85rem', fontWeight: '500' }}>Wedding Reception</p>
+      <motion.div variants={itemVariants} style={{ margin: '2.5rem 0', borderTop: '1px solid var(--royal-gold)', paddingTop: '1.5rem', opacity: 0.6 }}>
+        <p style={{ textTransform: 'uppercase', letterSpacing: '8px', fontSize: '0.85rem', fontWeight: '400' }}>Wedding Reception</p>
       </motion.div>
 
       <Countdown />
@@ -148,19 +148,19 @@ const Page2 = ({ onNext }) => (
       <motion.h2 variants={itemVariants} className="script-text" style={{ fontSize: '3rem', marginBottom: '2rem', color: 'var(--royal-gold)' }}>With Love & Blessings</motion.h2>
       
       <motion.div variants={itemVariants} className="family-section">
-        <h3 style={{ color: 'var(--royal-gold)', marginBottom: '0.3rem', fontSize: '1.4rem', textTransform: 'uppercase', letterSpacing: '2px' }}>Groom</h3>
-        <p className="script-text" style={{ fontSize: '2.2rem', marginBottom: '0.5rem' }}>Mohamed Sanad</p>
-        <p style={{ fontSize: '1rem', opacity: 0.8, fontWeight: '400' }}>Son of Mr. Shamsudheen Vellathur</p>
-        <p style={{ fontSize: '1rem', opacity: 0.8, fontWeight: '400' }}>& Mrs. Jemsheera C.P</p>
+        <h3 style={{ marginBottom: '0.5rem', fontSize: '1.2rem' }}>Groom</h3>
+        <p className="script-text" style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>Mohamed Sanad</p>
+        <p style={{ fontSize: '1.1rem', opacity: 0.8 }}>Son of Mr. Shamsudheen Vellathur</p>
+        <p style={{ fontSize: '1.1rem', opacity: 0.8 }}>& Mrs. Jemsheera C.P</p>
       </motion.div>
 
-      <motion.div variants={itemVariants} style={{ margin: '1.5rem 0', opacity: 0.4 }}>🌸</motion.div>
+      <motion.div variants={itemVariants} style={{ margin: '1.5rem 0', opacity: 0.6, fontSize: '1.5rem' }}>✧</motion.div>
 
       <motion.div variants={itemVariants} className="family-section">
-        <h3 style={{ color: 'var(--royal-gold)', marginBottom: '0.3rem', fontSize: '1.4rem', textTransform: 'uppercase', letterSpacing: '2px' }}>Bride</h3>
-        <p className="script-text" style={{ fontSize: '2.2rem', marginBottom: '0.5rem' }}>Rafna Shani</p>
-        <p style={{ fontSize: '1rem', opacity: 0.8, fontWeight: '400' }}>Daughter of Mr. Ismail</p>
-        <p style={{ fontSize: '1rem', opacity: 0.8, fontWeight: '400' }}>& Mrs. Fathima</p>
+        <h3 style={{ marginBottom: '0.5rem', fontSize: '1.2rem' }}>Bride</h3>
+        <p className="script-text" style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>Rafna Shani</p>
+        <p style={{ fontSize: '1.1rem', opacity: 0.8 }}>Daughter of Mr. Ismail</p>
+        <p style={{ fontSize: '1.1rem', opacity: 0.8 }}>& Mrs. Fathima</p>
       </motion.div>
 
       <motion.button variants={itemVariants} className="btn-primary" onClick={onNext}>
@@ -179,21 +179,21 @@ const Page3 = ({ onNext }) => (
     className="page-container"
   >
     <div className="glass-card">
-      <motion.h2 variants={itemVariants} style={{ marginBottom: '2.5rem', fontSize: '2.5rem', fontWeight: '400' }}>The Celebration</motion.h2>
+      <motion.h2 variants={itemVariants} style={{ marginBottom: '2.5rem', fontSize: '2.2rem' }}>The Celebration</motion.h2>
       
       <motion.div variants={itemVariants} className="detail-item">
         <Calendar size={22} color="var(--royal-gold)" />
-        <p style={{ fontSize: '1.2rem', fontWeight: '500' }}>Sunday, 10 May 2026</p>
+        <p style={{ fontSize: '1.2rem' }}>Sunday, 10 May 2026</p>
       </motion.div>
       
       <motion.div variants={itemVariants} className="detail-item">
         <Clock size={22} color="var(--royal-gold)" />
-        <p style={{ fontSize: '1.2rem', fontWeight: '500' }}>4:00 PM – 8:00 PM</p>
+        <p style={{ fontSize: '1.2rem' }}>4:00 PM – 8:00 PM</p>
       </motion.div>
 
       <motion.div variants={itemVariants} className="detail-item" style={{ alignItems: 'flex-start' }}>
         <MapPin size={22} color="var(--royal-gold)" style={{ marginTop: '5px' }} />
-        <p style={{ fontSize: '1.2rem', fontWeight: '500' }}>Kunhimmu Auditorium<br/><span style={{ fontSize: '0.9rem', opacity: 0.7, fontWeight: '400' }}>P.C. Padi, Ezhur, Tirur</span></p>
+        <p style={{ fontSize: '1.2rem' }}>Kunhimmu Auditorium<br/><span style={{ fontSize: '0.9rem', opacity: 0.7 }}>P.C. Padi, Ezhur, Tirur</span></p>
       </motion.div>
 
       <motion.div variants={itemVariants} className="map-placeholder">
@@ -238,7 +238,7 @@ const Page4 = () => {
             <div className="success-icon" style={{ background: 'var(--royal-gold)' }}><Check size={40} color="white" /></div>
             <h2 className="script-text" style={{ fontSize: '3.5rem', color: 'var(--royal-gold)' }}>{choice === 'yes' ? 'Great!' : 'Thank You'}</h2>
             <p style={{ fontSize: '1.2rem', marginTop: '1rem' }}>{choice === 'yes' ? 'We are so happy to hear that! 💖' : 'Thank you for letting us know 💕'}</p>
-            <div style={{ marginTop: '3.5rem', fontSize: '1.1rem', opacity: 0.6, fontStyle: 'italic', fontFamily: 'var(--font-royal)' }}>
+            <div style={{ marginTop: '3.5rem', fontSize: '1.1rem', opacity: 0.8, fontStyle: 'italic' }}>
                With love, Vellathur Family
             </div>
           </motion.div>

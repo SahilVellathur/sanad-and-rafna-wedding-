@@ -1,18 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Montserrat:wght@300;400;500;600&family=Great+Vibes&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Lora:ital,wght@0,400..700;1,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=UnifrakturMaguntia&display=swap');
 
 :root {
-  --cream: #FFFDF5; /* Solid Cream / Off-White */
-  --royal-gold: #E2C9A1; /* Bold Ivory / Antique Gold */
-  --stroke-gold: #8D734A; /* Deep Outline */
-  --soft-gold: #f3dec0;
-  --feedback-cream: #FFFDD0; /* Brighter Ivory Feedback */
-  --text-dark: #2c2c2c;
-  --glass-bg: rgba(255, 255, 255, 0.2);
-  --gold-border: rgba(141, 115, 74, 0.4);
+  --royal-green: #043927; /* Deep Emerald Green */
+  --royal-gold: #D4AF37; /* Metallic Gold */
+  --ivory: #F8F4E3; /* Lustrous Ivory */
+  --gold-glow: rgba(212, 175, 55, 0.4);
+  --ivory-glow: rgba(248, 244, 227, 0.3);
   
-  --font-royal: 'Playfair Display', serif;
-  --font-body: 'Montserrat', sans-serif;
-  --font-script: 'Great Vibes', cursive;
+  --font-heading: 'Cinzel', serif;
+  --font-body: 'Lora', serif;
+  --font-monogram: 'UnifrakturMaguntia', cursive;
 }
 
 * {
@@ -26,30 +23,36 @@ html, body {
   height: 100%;
   width: 100%;
   overflow-x: hidden;
-  background-color: var(--cream);
+  background-color: var(--royal-green);
   font-family: var(--font-body);
 }
 
 body {
   margin: 0;
-  color: var(--text-dark);
+  color: var(--ivory);
   min-height: 100vh;
   width: 100vw;
   user-select: none;
 }
 
 h1, h2, h3 {
-  font-family: var(--font-royal);
-  letter-spacing: 1px;
-  font-weight: 800;
+  font-family: var(--font-heading);
+  letter-spacing: 4px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--royal-gold);
+  text-shadow: 0 0 10px var(--gold-glow);
 }
 
 .script-text {
-  font-family: var(--font-script);
-  font-weight: 900;
+  font-family: var(--font-monogram);
+  font-weight: 400;
   color: var(--royal-gold);
-  -webkit-text-stroke: 1px var(--stroke-gold);
-  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(to bottom, #D4AF37 0%, #F8F4E3 50%, #D4AF37 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.5));
+  letter-spacing: 2px;
 }
 
 .app-container {
@@ -60,35 +63,11 @@ h1, h2, h3 {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  background-color: var(--cream);
+  background-color: var(--royal-green);
+  /* Damask Pattern Watermark */
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 20c-5 0-10 5-10 10s5 10 10 10 10-5 10-10-5-10-10-10zm0 60c-5 0-10 5-10 10s5 10 10 10 10-5 10-10-5-10-10-10zM20 50c0-5-5-10-10-10S0 45 0 50s5 10 10 10 10-5 10-10zm60 0c0-5 5-10 10-10s10 5 10 10-5 10-10 10-10-5-10-10zM50 0C22.4 0 0 22.4 0 50s22.4 50 50 50 50-22.4 50-50S77.6 0 50 0zm0 90C28 90 10 72 10 50S28 10 50 10s40 18 40 40-18 40-40 40z' fill='%23ffffff' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
   /* Luxury Vignette Effect */
-  box-shadow: inset 0 0 120px rgba(0, 0, 0, 0.03),
-              inset 0 0 250px rgba(0, 0, 0, 0.02);
-}
-
-/* Luxury Illustration Layer */
-.app-container::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 55%;
-  height: 55%;
-  background-image: url('/assets/wedding-illustration.png');
-  background-size: contain;
-  background-position: bottom right;
-  background-repeat: no-repeat;
-  opacity: 0.8;
-  mix-blend-mode: multiply;
-  z-index: 1;
-  pointer-events: none;
-  /* Premium Soft Fade Mask */
-  mask-image: linear-gradient(to top, black 80%, transparent), 
-              linear-gradient(to left, black 80%, transparent);
-  mask-composite: intersect;
-  -webkit-mask-image: linear-gradient(to top, black 80%, transparent), 
-                      linear-gradient(to left, black 80%, transparent);
-  -webkit-mask-composite: source-in;
+  box-shadow: inset 0 0 200px rgba(0, 0, 0, 0.6);
 }
 
 .page-container {
@@ -103,80 +82,92 @@ h1, h2, h3 {
 }
 
 .glass-card {
-  background: var(--glass-bg);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  padding: 3.5rem 2.5rem;
-  border-radius: 40px;
-  border: 1px solid var(--gold-border);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  background: rgba(4, 57, 39, 0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 4rem 3rem;
+  border: 1px solid var(--royal-gold);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4),
+              inset 0 0 20px rgba(212, 175, 55, 0.1);
   max-width: 550px;
   width: 100%;
   text-align: center;
   position: relative;
-  z-index: 20; /* Layered above the illustration */
+  z-index: 20;
+}
+
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  border: 1px solid var(--royal-gold);
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.glass-card::after {
+  content: '✧';
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--royal-gold);
+  font-size: 1.5rem;
 }
 
 .btn-primary {
   margin-top: 2.5rem;
   padding: 1.2rem 3rem;
-  background: linear-gradient(135deg, var(--royal-gold), var(--soft-gold));
-  color: var(--text-dark);
-  border: 1px solid var(--stroke-gold);
-  border-radius: 50px;
-  font-family: var(--font-royal);
-  font-size: 1.1rem;
-  font-weight: 800;
+  background: transparent;
+  color: var(--royal-gold);
+  border: 1px solid var(--royal-gold);
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  box-shadow: 0 5px 15px rgba(141, 115, 74, 0.3);
-  letter-spacing: 2px;
+  transition: all 0.3s ease-in-out;
+  letter-spacing: 4px;
   text-transform: uppercase;
   outline: none;
+  position: relative;
+  overflow: hidden;
 }
 
 .btn-primary:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(141, 115, 74, 0.5);
+  background: var(--royal-gold);
+  color: var(--royal-green);
+  box-shadow: 0 0 20px var(--gold-glow);
 }
 
-.btn-primary:active, .btn-primary:focus {
-  background: var(--feedback-cream) !important;
-  color: var(--text-dark) !important;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.6) !important;
-  transform: scale(0.96);
+.btn-primary:active {
+  transform: scale(0.98);
 }
 
 .btn-rsvp {
   padding: 1.2rem;
-  border-radius: 20px;
-  border: 1px solid var(--gold-border);
-  background: rgba(255, 255, 255, 0.4);
-  font-family: var(--font-royal);
-  font-size: 1.1rem;
+  background: transparent;
+  border: 1px solid var(--royal-gold);
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  color: var(--text-dark);
+  transition: all 0.3s ease-in-out;
+  color: var(--ivory);
   outline: none;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 .btn-rsvp:hover {
-  background: white;
-  transform: scale(1.02);
-  border-color: var(--stroke-gold);
-}
-
-.btn-rsvp:active, .btn-rsvp:focus {
-  background: var(--feedback-cream) !important;
-  color: var(--text-dark) !important;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.6) !important;
-  transform: scale(0.96);
-  border-color: var(--stroke-gold);
+  background: rgba(212, 175, 55, 0.1);
+  border-color: var(--ivory);
 }
 
 .btn-rsvp.yes {
-  background: rgba(226, 201, 161, 0.2);
+  background: rgba(212, 175, 55, 0.05);
 }
 
 /* Countdown Styles */
@@ -194,21 +185,20 @@ h1, h2, h3 {
 }
 
 .countdown-value {
-  font-family: var(--font-royal);
+  font-family: var(--font-heading);
   font-size: 2.2rem;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--royal-gold);
-  -webkit-text-stroke: 0.5px var(--stroke-gold);
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  text-shadow: 0 0 10px var(--gold-glow);
 }
 
 .countdown-label {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
   opacity: 0.8;
-  font-weight: 600;
-  color: var(--text-dark);
+  font-weight: 400;
+  color: var(--ivory);
 }
 
 /* Crest Styles */
@@ -250,18 +240,18 @@ h1, h2, h3 {
 }
 
 .indicator-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: rgba(141, 115, 74, 0.3);
+  width: 10px;
+  height: 10px;
+  background: rgba(212, 175, 55, 0.2);
   cursor: pointer;
   transition: all 0.3s;
+  border: 1px solid var(--royal-gold);
 }
 
 .indicator-dot.active {
-  width: 25px;
-  border-radius: 10px;
-  background: var(--stroke-gold);
+  width: 30px;
+  background: var(--royal-gold);
+  box-shadow: 0 0 10px var(--gold-glow);
 }
 
 @keyframes fall {
@@ -271,43 +261,21 @@ h1, h2, h3 {
 }
 
 @media (max-width: 600px) {
-  .app-container::after {
-    width: 75%;
-    height: 45%;
-    opacity: 0.75;
-    bottom: 0;
-    right: 0;
-    -webkit-mask-image: linear-gradient(to top, black 75%, transparent), 
-                        linear-gradient(to left, black 75%, transparent);
-  }
   .page-container {
-    padding: 1rem;
-    align-items: flex-start;
-    padding-top: 3.5rem;
+    padding: 1.5rem;
   }
   .glass-card {
-    padding: 2.5rem 1.2rem;
-    width: 92%;
-    border-radius: 30px;
-  }
-  .royal-crest {
-    font-size: 4.5rem;
-    margin-bottom: 1rem;
+    padding: 3rem 1.5rem;
+    width: 95%;
   }
   h1 {
-    font-size: 2rem !important;
-  }
-  .script-text {
     font-size: 1.8rem !important;
   }
+  .script-text {
+    font-size: 3.5rem !important;
+  }
   .btn-primary, .btn-rsvp {
-    padding: 1.4rem 2rem;
-    font-size: 1rem;
-  }
-  .countdown-container {
-    gap: 0.8rem;
-  }
-  .countdown-value {
-    font-size: 1.8rem;
+    padding: 1.2rem 2rem;
+    font-size: 0.9rem;
   }
 }
