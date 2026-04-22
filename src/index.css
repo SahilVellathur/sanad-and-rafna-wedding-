@@ -1,15 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Lora:ital,wght@0,400..700;1,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=UnifrakturMaguntia&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Montserrat:wght@300;400;500&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
 :root {
-  --royal-green: #043927; /* Deep Emerald Green */
-  --royal-gold: #D4AF37; /* Metallic Gold */
-  --ivory: #F8F4E3; /* Lustrous Ivory */
-  --gold-glow: rgba(212, 175, 55, 0.4);
-  --ivory-glow: rgba(248, 244, 227, 0.3);
+  --royal-blue: #001a4d; /* Deep Royal Navy Blue */
+  --ivory: #F5F5DC; /* Bold Ivory */
+  --gold-acc: #D4AF37;
   
-  --font-heading: 'Cinzel', serif;
-  --font-body: 'Lora', serif;
-  --font-monogram: 'UnifrakturMaguntia', cursive;
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Montserrat', sans-serif;
+  --font-monogram: 'Cormorant Garamond', serif;
 }
 
 * {
@@ -23,7 +21,7 @@ html, body {
   height: 100%;
   width: 100%;
   overflow-x: hidden;
-  background-color: var(--royal-green);
+  background-color: var(--royal-blue);
   font-family: var(--font-body);
 }
 
@@ -38,21 +36,43 @@ body {
 h1, h2, h3 {
   font-family: var(--font-heading);
   letter-spacing: 4px;
-  font-weight: 700;
-  text-transform: uppercase;
-  color: var(--royal-gold);
-  text-shadow: 0 0 10px var(--gold-glow);
+  font-weight: 400;
+  color: var(--ivory);
 }
 
 .script-text {
   font-family: var(--font-monogram);
-  font-weight: 400;
-  color: var(--royal-gold);
-  background: linear-gradient(to bottom, #D4AF37 0%, #F8F4E3 50%, #D4AF37 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.5));
-  letter-spacing: 2px;
+  font-weight: 300;
+  color: var(--ivory);
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  font-style: italic;
+}
+
+.monogram-container {
+  position: relative;
+  display: inline-block;
+  margin: 2rem 0;
+  padding: 1rem 0;
+}
+
+.monogram-container::before,
+.monogram-container::after {
+  content: '';
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: var(--ivory);
+  opacity: 0.4;
+}
+
+.monogram-container::before {
+  top: 0;
+}
+
+.monogram-container::after {
+  bottom: 0;
 }
 
 .app-container {
@@ -63,11 +83,9 @@ h1, h2, h3 {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  background-color: var(--royal-green);
-  /* Damask Pattern Watermark */
-  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 20c-5 0-10 5-10 10s5 10 10 10 10-5 10-10-5-10-10-10zm0 60c-5 0-10 5-10 10s5 10 10 10 10-5 10-10-5-10-10-10zM20 50c0-5-5-10-10-10S0 45 0 50s5 10 10 10 10-5 10-10zm60 0c0-5 5-10 10-10s10 5 10 10-5 10-10 10-10-5-10-10zM50 0C22.4 0 0 22.4 0 50s22.4 50 50 50 50-22.4 50-50S77.6 0 50 0zm0 90C28 90 10 72 10 50S28 10 50 10s40 18 40 40-18 40-40 40z' fill='%23ffffff' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
-  /* Luxury Vignette Effect */
-  box-shadow: inset 0 0 200px rgba(0, 0, 0, 0.6);
+  background-color: var(--royal-blue);
+  /* Elegant Soft Vignette */
+  box-shadow: inset 0 0 150px rgba(0, 0, 0, 0.5);
 }
 
 .page-container {
@@ -82,13 +100,12 @@ h1, h2, h3 {
 }
 
 .glass-card {
-  background: rgba(4, 57, 39, 0.4);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
   padding: 4rem 3rem;
-  border: 1px solid var(--royal-gold);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4),
-              inset 0 0 20px rgba(212, 175, 55, 0.1);
+  border: 1px solid rgba(245, 245, 220, 0.2);
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.4);
   max-width: 550px;
   width: 100%;
   text-align: center;
@@ -96,78 +113,56 @@ h1, h2, h3 {
   z-index: 20;
 }
 
-.glass-card::before {
-  content: '';
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  right: 10px;
-  bottom: 10px;
-  border: 1px solid var(--royal-gold);
-  pointer-events: none;
-  opacity: 0.5;
-}
-
-.glass-card::after {
-  content: '✧';
-  position: absolute;
-  top: 15px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: var(--royal-gold);
-  font-size: 1.5rem;
-}
+/* Clean Borders removed for modern luxury look */
 
 .btn-primary {
   margin-top: 2.5rem;
   padding: 1.2rem 3rem;
   background: transparent;
-  color: var(--royal-gold);
-  border: 1px solid var(--royal-gold);
+  color: var(--ivory);
+  border: 1px solid var(--ivory);
   font-family: var(--font-heading);
-  font-size: 1rem;
-  font-weight: 700;
+  font-size: 0.9rem;
+  font-weight: 400;
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  letter-spacing: 4px;
+  transition: all 0.4s ease;
+  letter-spacing: 5px;
   text-transform: uppercase;
   outline: none;
-  position: relative;
-  overflow: hidden;
 }
 
 .btn-primary:hover {
-  background: var(--royal-gold);
-  color: var(--royal-green);
-  box-shadow: 0 0 20px var(--gold-glow);
+  background: var(--ivory);
+  color: var(--royal-blue);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 .btn-primary:active {
-  transform: scale(0.98);
+  transform: scale(0.97);
 }
 
 .btn-rsvp {
   padding: 1.2rem;
   background: transparent;
-  border: 1px solid var(--royal-gold);
+  border: 1px solid rgba(245, 245, 220, 0.3);
   font-family: var(--font-heading);
-  font-size: 0.9rem;
-  font-weight: 700;
+  font-size: 0.85rem;
+  font-weight: 400;
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease;
   color: var(--ivory);
   outline: none;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
 }
 
 .btn-rsvp:hover {
-  background: rgba(212, 175, 55, 0.1);
   border-color: var(--ivory);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .btn-rsvp.yes {
-  background: rgba(212, 175, 55, 0.05);
+  background: rgba(255, 255, 255, 0.03);
 }
 
 /* Countdown Styles */
@@ -187,17 +182,16 @@ h1, h2, h3 {
 .countdown-value {
   font-family: var(--font-heading);
   font-size: 2.2rem;
-  font-weight: 700;
-  color: var(--royal-gold);
-  text-shadow: 0 0 10px var(--gold-glow);
+  font-weight: 400;
+  color: var(--ivory);
 }
 
 .countdown-label {
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   text-transform: uppercase;
-  letter-spacing: 3px;
-  opacity: 0.8;
-  font-weight: 400;
+  letter-spacing: 4px;
+  opacity: 0.7;
+  font-weight: 300;
   color: var(--ivory);
 }
 
@@ -242,16 +236,15 @@ h1, h2, h3 {
 .indicator-dot {
   width: 10px;
   height: 10px;
-  background: rgba(212, 175, 55, 0.2);
+  background: rgba(255, 255, 255, 0.1);
   cursor: pointer;
   transition: all 0.3s;
-  border: 1px solid var(--royal-gold);
+  border: 1px solid rgba(245, 245, 220, 0.3);
 }
 
 .indicator-dot.active {
   width: 30px;
-  background: var(--royal-gold);
-  box-shadow: 0 0 10px var(--gold-glow);
+  background: var(--ivory);
 }
 
 @keyframes fall {
@@ -269,13 +262,13 @@ h1, h2, h3 {
     width: 95%;
   }
   h1 {
-    font-size: 1.8rem !important;
+    font-size: 2rem !important;
   }
   .script-text {
     font-size: 3.5rem !important;
   }
   .btn-primary, .btn-rsvp {
-    padding: 1.2rem 2rem;
-    font-size: 0.9rem;
+    padding: 1.1rem 1.8rem;
+    font-size: 0.85rem;
   }
 }
