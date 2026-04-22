@@ -6,6 +6,26 @@ import './App.css';
 // --- CONFIG ---
 const WEDDING_DATE = new Date('2026-05-10T16:00:00');
 
+// --- ANIMATION VARIANTS ---
+const containerVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { 
+      duration: 0.8, 
+      ease: [0.16, 1, 0.3, 1],
+      staggerChildren: 0.2
+    }
+  },
+  exit: { opacity: 0, y: -20, transition: { duration: 0.4 } }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+};
+
 // --- COMPONENTS ---
 
 const FallingPetals = () => {
@@ -78,10 +98,10 @@ const Countdown = () => {
   return (
     <div className="countdown-container">
       {Object.entries(timeLeft).map(([label, value]) => (
-        <div key={label} className="countdown-item">
+        <motion.div key={label} variants={itemVariants} className="countdown-item">
           <span className="countdown-value">{String(value).padStart(2, '0')}</span>
           <span className="countdown-label">{label}</span>
-        </div>
+        </motion.div>
       ))}
     </div>
   );
@@ -91,103 +111,106 @@ const Countdown = () => {
 
 const Page1 = ({ onNext }) => (
   <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    exit={{ opacity: 0, y: -20 }}
+    variants={containerVariants}
+    initial="hidden"
+    animate="visible"
+    exit="exit"
     className="page-container"
   >
-    <div className="floral-frame">
-      <h2 className="cursive" style={{ fontSize: '5rem', marginBottom: '1rem' }}>S & R</h2>
-      <h1 style={{ fontSize: '2.5rem', letterSpacing: '2px', fontWeight: '400' }}>MOHAMED SANAD</h1>
-      <p style={{ margin: '1rem 0', fontStyle: 'italic', opacity: 0.8, fontSize: '1.2rem' }}>&</p>
-      <h1 style={{ fontSize: '2.5rem', letterSpacing: '2px', fontWeight: '400' }}>RAFNA SHANI</h1>
+    <div className="glass-card">
+      <motion.h2 variants={itemVariants} className="script-text" style={{ fontSize: '5rem', marginBottom: '1rem', color: 'var(--royal-gold)' }}>S & R</motion.h2>
+      <motion.h1 variants={itemVariants} style={{ fontSize: '2.5rem', fontWeight: '400' }}>SANAD</motion.h1>
+      <motion.p variants={itemVariants} className="script-text" style={{ fontSize: '2rem', margin: '0.5rem 0', opacity: 0.6 }}>and</motion.p>
+      <motion.h1 variants={itemVariants} style={{ fontSize: '2.5rem', fontWeight: '400' }}>RAFNA</motion.h1>
       
-      <div style={{ margin: '2rem 0', borderTop: '1px solid rgba(0,0,0,0.1)', paddingTop: '1.5rem' }}>
-        <p style={{ textTransform: 'uppercase', letterSpacing: '4px', fontSize: '0.9rem', fontWeight: '300' }}>Wedding Reception</p>
-      </div>
+      <motion.div variants={itemVariants} style={{ margin: '2.5rem 0', borderTop: '1px solid var(--gold-border)', paddingTop: '1.5rem' }}>
+        <p style={{ textTransform: 'uppercase', letterSpacing: '5px', fontSize: '0.85rem', fontWeight: '500' }}>Wedding Reception</p>
+      </motion.div>
 
       <Countdown />
 
-      <button className="btn-primary" onClick={onNext}>
-        💕 Open Invitation
-      </button>
+      <motion.button variants={itemVariants} className="btn-primary" onClick={onNext}>
+        Open Invitation
+      </motion.button>
     </div>
   </motion.div>
 );
 
 const Page2 = ({ onNext }) => (
   <motion.div
-    initial={{ opacity: 0, scale: 0.95 }}
-    animate={{ opacity: 1, scale: 1 }}
-    exit={{ opacity: 0, scale: 1.05 }}
+    variants={containerVariants}
+    initial="hidden"
+    animate="visible"
+    exit="exit"
     className="page-container"
   >
     <div className="glass-card">
-      <h2 className="cursive" style={{ fontSize: '3rem', marginBottom: '2rem' }}>With Love & Blessings</h2>
+      <motion.h2 variants={itemVariants} className="script-text" style={{ fontSize: '3rem', marginBottom: '2rem', color: 'var(--royal-gold)' }}>With Love & Blessings</motion.h2>
       
-      <div className="family-section">
-        <h3 style={{ color: 'var(--accent-pink)', marginBottom: '0.2rem', fontSize: '1.8rem' }}>Groom</h3>
-        <p style={{ fontSize: '1.6rem', fontWeight: '500', marginBottom: '0.5rem', fontFamily: 'var(--font-serif)' }}>MOHAMED SANAD</p>
-        <p style={{ fontSize: '1.2rem', opacity: 0.8, fontStyle: 'italic' }}>Son of Mr. Shamsudheen Vellathur</p>
-        <p style={{ fontSize: '1.2rem', opacity: 0.8, fontStyle: 'italic' }}>& Mrs. Jemsheera C.P</p>
-      </div>
+      <motion.div variants={itemVariants} className="family-section">
+        <h3 style={{ color: 'var(--royal-gold)', marginBottom: '0.3rem', fontSize: '1.4rem', textTransform: 'uppercase', letterSpacing: '2px' }}>Groom</h3>
+        <p className="script-text" style={{ fontSize: '2.2rem', marginBottom: '0.5rem' }}>Mohamed Sanad</p>
+        <p style={{ fontSize: '1rem', opacity: 0.8, fontWeight: '400' }}>Son of Mr. Shamsudheen Vellathur</p>
+        <p style={{ fontSize: '1rem', opacity: 0.8, fontWeight: '400' }}>& Mrs. Jemsheera C.P</p>
+      </motion.div>
 
-      <div style={{ margin: '1.5rem 0', opacity: 0.3, fontSize: '1.5rem' }}>🌸</div>
+      <motion.div variants={itemVariants} style={{ margin: '1.5rem 0', opacity: 0.4 }}>🌸</motion.div>
 
-      <div className="family-section">
-        <h3 style={{ color: 'var(--accent-pink)', marginBottom: '0.2rem', fontSize: '1.8rem' }}>Bride</h3>
-        <p style={{ fontSize: '1.6rem', fontWeight: '500', marginBottom: '0.5rem', fontFamily: 'var(--font-serif)' }}>RAFNA SHANI</p>
-        <p style={{ fontSize: '1.2rem', opacity: 0.8, fontStyle: 'italic' }}>Daughter of Mr. Ismail</p>
-        <p style={{ fontSize: '1.2rem', opacity: 0.8, fontStyle: 'italic' }}>& Mrs. Fathima</p>
-      </div>
+      <motion.div variants={itemVariants} className="family-section">
+        <h3 style={{ color: 'var(--royal-gold)', marginBottom: '0.3rem', fontSize: '1.4rem', textTransform: 'uppercase', letterSpacing: '2px' }}>Bride</h3>
+        <p className="script-text" style={{ fontSize: '2.2rem', marginBottom: '0.5rem' }}>Rafna Shani</p>
+        <p style={{ fontSize: '1rem', opacity: 0.8, fontWeight: '400' }}>Daughter of Mr. Ismail</p>
+        <p style={{ fontSize: '1rem', opacity: 0.8, fontWeight: '400' }}>& Mrs. Fathima</p>
+      </motion.div>
 
-      <button className="btn-primary" onClick={onNext}>
-        👉 Next
-      </button>
+      <motion.button variants={itemVariants} className="btn-primary" onClick={onNext}>
+        Next
+      </motion.button>
     </div>
   </motion.div>
 );
 
 const Page3 = ({ onNext }) => (
   <motion.div
-    initial={{ opacity: 0, x: 50 }}
-    animate={{ opacity: 1, x: 0 }}
-    exit={{ opacity: 0, x: -50 }}
+    variants={containerVariants}
+    initial="hidden"
+    animate="visible"
+    exit="exit"
     className="page-container"
   >
     <div className="glass-card">
-      <h2 style={{ marginBottom: '2rem', fontSize: '2.5rem', fontWeight: '500' }}>Wedding Details</h2>
+      <motion.h2 variants={itemVariants} style={{ marginBottom: '2.5rem', fontSize: '2.5rem', fontWeight: '400' }}>The Celebration</motion.h2>
       
-      <div className="detail-item">
-        <Calendar size={24} color="var(--accent-pink)" />
-        <p style={{ fontSize: '1.3rem' }}>Sunday, 10 May 2026</p>
-      </div>
+      <motion.div variants={itemVariants} className="detail-item">
+        <Calendar size={22} color="var(--royal-gold)" />
+        <p style={{ fontSize: '1.2rem', fontWeight: '500' }}>Sunday, 10 May 2026</p>
+      </motion.div>
       
-      <div className="detail-item">
-        <Clock size={24} color="var(--accent-pink)" />
-        <p style={{ fontSize: '1.3rem' }}>4:00 PM – 8:00 PM</p>
-      </div>
+      <motion.div variants={itemVariants} className="detail-item">
+        <Clock size={22} color="var(--royal-gold)" />
+        <p style={{ fontSize: '1.2rem', fontWeight: '500' }}>4:00 PM – 8:00 PM</p>
+      </motion.div>
 
-      <div className="detail-item" style={{ alignItems: 'flex-start' }}>
-        <MapPin size={24} color="var(--accent-pink)" style={{ marginTop: '5px' }} />
-        <p style={{ fontSize: '1.3rem' }}>Kunhimmu Auditorium<br/><span style={{ fontSize: '1rem', opacity: 0.7 }}>P.C. Padi, Ezhur, Tirur</span></p>
-      </div>
+      <motion.div variants={itemVariants} className="detail-item" style={{ alignItems: 'flex-start' }}>
+        <MapPin size={22} color="var(--royal-gold)" style={{ marginTop: '5px' }} />
+        <p style={{ fontSize: '1.2rem', fontWeight: '500' }}>Kunhimmu Auditorium<br/><span style={{ fontSize: '0.9rem', opacity: 0.7, fontWeight: '400' }}>P.C. Padi, Ezhur, Tirur</span></p>
+      </motion.div>
 
-      <div className="map-placeholder">
+      <motion.div variants={itemVariants} className="map-placeholder">
         <iframe 
           title="Location Map"
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3917.634853456071!2d75.93502167504386!3d10.91533048924203!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba7b185abdf736b%3A0xbbdee7e267492d35!2sKUNHIMMU%20AUDITORIUM!5e0!3m2!1sen!2sin" 
           width="100%" 
           height="180" 
-          style={{ border: 0, borderRadius: '15px' }} 
+          style={{ border: 0, borderRadius: '20px' }} 
           allowFullScreen="" 
           loading="lazy"
         ></iframe>
-      </div>
+      </motion.div>
 
-      <button className="btn-primary" onClick={onNext}>
-        👉 Continue
-      </button>
+      <motion.button variants={itemVariants} className="btn-primary" onClick={onNext}>
+        Continue
+      </motion.button>
     </div>
   </motion.div>
 );
@@ -203,30 +226,40 @@ const Page4 = () => {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
       className="page-container"
     >
       <div className="glass-card">
         {submitted ? (
-          <div style={{ textAlign: 'center' }}>
-            <div className="success-icon"><Check size={40} color="white" /></div>
-            <h2 className="cursive" style={{ fontSize: '3rem' }}>{choice === 'yes' ? 'Great!' : 'Thank You'}</h2>
-            <p style={{ fontSize: '1.2rem' }}>{choice === 'yes' ? 'We are so happy to hear that! 💖' : 'Thank you for letting us know 💕'}</p>
-            <div style={{ marginTop: '3rem', fontSize: '1rem', opacity: 0.6, fontStyle: 'italic' }}>
+          <motion.div variants={itemVariants} style={{ textAlign: 'center' }}>
+            <div className="success-icon" style={{ background: 'var(--royal-gold)' }}><Check size={40} color="white" /></div>
+            <h2 className="script-text" style={{ fontSize: '3.5rem', color: 'var(--royal-gold)' }}>{choice === 'yes' ? 'Great!' : 'Thank You'}</h2>
+            <p style={{ fontSize: '1.2rem', marginTop: '1rem' }}>{choice === 'yes' ? 'We are so happy to hear that! 💖' : 'Thank you for letting us know 💕'}</p>
+            <div style={{ marginTop: '3.5rem', fontSize: '1.1rem', opacity: 0.6, fontStyle: 'italic', fontFamily: 'var(--font-royal)' }}>
                With love, Vellathur Family
             </div>
-          </div>
+          </motion.div>
         ) : (
           <>
-            <h2 style={{ marginBottom: '2rem', fontSize: '2.5rem' }}>Will you join us?</h2>
+            <motion.h2 variants={itemVariants} style={{ marginBottom: '2.5rem', fontSize: '2.5rem' }}>Will you join us?</motion.h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
-              <button className="btn-rsvp yes" onClick={() => handleRSVP('yes')}>
+              <motion.button 
+                variants={itemVariants} 
+                className="btn-rsvp yes" 
+                onClick={() => handleRSVP('yes')}
+              >
                 💖 Yes, I will attend
-              </button>
-              <button className="btn-rsvp no" onClick={() => handleRSVP('no')}>
+              </motion.button>
+              <motion.button 
+                variants={itemVariants} 
+                className="btn-rsvp no" 
+                onClick={() => handleRSVP('no')}
+              >
                 🌿 Sorry, I can’t attend
-              </button>
+              </motion.button>
             </div>
           </>
         )}
