@@ -1,44 +1,43 @@
-@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Great+Vibes&display=swap');
 
 :root {
-  --soft-pink: #FCE4EC;
-  --cream: #FFF9F0;
-  --light-peach: #FFF0E0;
-  --white: #FFFFFF;
-  --accent-pink: #F8BBD0;
-  --text-main: #5D4037;
-  --text-soft: #8D6E63;
-  --font-cursive: 'Great Vibes', cursive;
-  --font-serif: 'Playfair Display', serif;
+  --cream: #faf7f2;
+  --soft-pink: #fce4ec;
+  --accent-pink: #d81b60;
+  --text-main: #3e2723;
+  --font-serif: 'Cormorant Garamond', serif;
   --font-sans: 'Inter', sans-serif;
+  --font-cursive: 'Great Vibes', cursive;
 }
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  background-color: var(--cream);
 }
 
 body {
   margin: 0;
   font-family: var(--font-sans);
-  background-color: var(--cream);
   color: var(--text-main);
   min-height: 100vh;
   width: 100vw;
   user-select: none;
-  overflow-x: hidden;
 }
 
-@media (min-width: 768px) {
-  body {
-    overflow: hidden;
-  }
+h1, h2, h3 {
+  font-family: var(--font-serif);
 }
 
-#root {
-  height: 100%;
+.cursive {
+  font-family: var(--font-cursive);
 }
 
 .app-container {
@@ -59,110 +58,83 @@ body {
 .page-container {
   flex: 1;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 2rem;
-  text-align: center;
   z-index: 10;
+  width: 100%;
 }
 
-@media (max-width: 480px) {
-  .page-container {
-    padding: 1rem;
-  }
-}
-
-h1, h2, h3 {
-  font-family: var(--font-serif);
-}
-
-.cursive {
-  font-family: var(--font-cursive);
-  font-size: 3.5rem;
-  color: var(--accent-pink);
-  margin-bottom: 0.5rem;
+.glass-card {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 3rem;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05);
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
 }
 
 .btn-primary {
-  background: var(--white);
-  border: none;
-  padding: 1rem 2rem;
-  border-radius: 50px;
-  font-family: var(--font-sans);
-  font-weight: 500;
-  color: var(--text-main);
-  box-shadow: 0 4px 15px rgba(248, 187, 208, 0.3);
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
   margin-top: 2rem;
-  font-size: 1.1rem;
+  padding: 1rem 2.5rem;
+  background: var(--accent-pink);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 4px 15px rgba(216, 27, 96, 0.2);
+  letter-spacing: 1px;
 }
 
-.btn-primary:active {
-  transform: scale(0.95);
-  box-shadow: 0 2px 8px rgba(248, 187, 208, 0.2);
-}
-
-/* Petals Animation */
-.petal {
-  position: absolute;
-  top: -10%;
-  z-index: 5;
-  pointer-events: none;
-  width: 20px;
-  height: 20px;
-  background-image: url('/assets/petal.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  opacity: 0.6;
-}
-
-@keyframes fall {
-  0% {
-    transform: translateY(0) rotate(0deg);
-    opacity: 0.6;
-  }
-  100% {
-    transform: translateY(110vh) rotate(360deg);
-    opacity: 0;
-  }
-}
-
-/* Card Styles */
-.glass-card {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(10px);
-  border-radius: 30px;
-  padding: 2.5rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  max-width: 90%;
-  width: 400px;
-  margin: auto;
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(216, 27, 96, 0.3);
 }
 
 /* Countdown Styles */
 .countdown-container {
   display: flex;
-  gap: 1rem;
-  margin: 1.5rem 0;
   justify-content: center;
+  gap: 1.5rem;
+  margin: 2rem 0;
 }
 
 .countdown-item {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .countdown-value {
-  font-size: 1.5rem;
-  font-weight: 600;
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: 500;
   color: var(--accent-pink);
 }
 
 .countdown-label {
   font-size: 0.7rem;
   text-transform: uppercase;
-  color: var(--text-soft);
+  letter-spacing: 1px;
+  opacity: 0.6;
+}
+
+@keyframes fall {
+  0% { transform: translateY(-100px) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+}
+
+@media (max-width: 600px) {
+  .glass-card {
+    padding: 2rem;
+  }
 }
