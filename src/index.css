@@ -44,11 +44,10 @@ h1, h2, h3 {
 
 .script-text {
   font-family: var(--font-script);
-  font-weight: 900; /* Ultra-Bold */
+  font-weight: 900;
   color: var(--royal-gold);
   -webkit-text-stroke: 1px var(--stroke-gold);
   text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
-  font-size: 5.5rem;
 }
 
 .app-container {
@@ -167,7 +166,7 @@ h1, h2, h3 {
   color: var(--text-dark);
 }
 
-/* Crest Override */
+/* Crest Styles */
 .royal-crest {
   font-family: var(--font-script);
   font-weight: 900;
@@ -227,11 +226,32 @@ h1, h2, h3 {
 }
 
 @media (max-width: 600px) {
-  .royal-crest {
-    font-size: 5rem;
+  .page-container {
+    padding: 1rem;
   }
   .glass-card {
-    padding: 2.5rem 1.5rem;
-    width: 95%;
+    padding: 2.5rem 1.2rem;
+    width: 90%;
+    border-radius: 30px;
+  }
+  .royal-crest {
+    font-size: 4.5rem;
+    margin-bottom: 1rem;
+  }
+  h1 {
+    font-size: 2rem !important;
+  }
+  .script-text {
+    font-size: 1.8rem !important;
+  }
+  .btn-primary, .btn-rsvp {
+    padding: 1.4rem 2rem;
+    font-size: 1rem;
+  }
+  .countdown-container {
+    gap: 0.8rem;
+  }
+  .countdown-value {
+    font-size: 1.8rem;
   }
 }
