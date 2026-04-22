@@ -119,14 +119,18 @@ const Page1 = ({ onNext }) => (
   >
     <div className="glass-card">
       <div className="bismillah">﷽</div>
-      <motion.p variants={itemVariants} style={{ fontSize: '1rem', letterSpacing: '2px', opacity: 0.8, marginBottom: '1.5rem', textTransform: 'uppercase' }}>With the blessings of Almighty Allah</motion.p>
+      <motion.p variants={itemVariants} style={{ fontSize: '0.9rem', letterSpacing: '2px', opacity: 0.9, marginBottom: '2rem', textTransform: 'uppercase', lineHeight: '1.6' }}>
+        Mr. & Mrs. request the pleasure of your company<br/>
+        at the Marriage of their son
+      </motion.p>
       
-      <motion.h1 variants={itemVariants} style={{ fontSize: '3rem', letterSpacing: '6px' }}>SANAD</motion.h1>
-      <motion.p variants={itemVariants} style={{ fontSize: '1.2rem', margin: '0.8rem 0', fontStyle: 'italic', opacity: 0.8 }}>&</motion.p>
-      <motion.h1 variants={itemVariants} style={{ fontSize: '3rem', letterSpacing: '6px' }}>RAFNA</motion.h1>
+      <motion.h1 variants={itemVariants} style={{ fontSize: '3.5rem', letterSpacing: '8px', color: 'var(--gold)', marginBottom: '1rem' }}>SANAD</motion.h1>
+      <motion.p variants={itemVariants} style={{ fontSize: '1.5rem', margin: '0.5rem 0', fontStyle: 'italic', opacity: 0.8 }}>&</motion.p>
+      <motion.h1 variants={itemVariants} style={{ fontSize: '3.5rem', letterSpacing: '8px', color: 'var(--gold)', marginTop: '1rem' }}>RAFNA</motion.h1>
       
-      <motion.div variants={itemVariants} style={{ margin: '2rem 0', borderTop: '1px solid rgba(212, 175, 55, 0.3)', paddingTop: '1.5rem' }}>
-        <p style={{ textTransform: 'uppercase', letterSpacing: '6px', fontSize: '0.9rem' }}>Royal Wedding Reception</p>
+      <motion.div variants={itemVariants} style={{ margin: '2.5rem 0', borderTop: '1px solid rgba(212, 175, 55, 0.3)', paddingTop: '2rem' }}>
+        <p style={{ textTransform: 'uppercase', letterSpacing: '4px', fontSize: '1rem', marginBottom: '1rem' }}>The Nikah, Insha'Allah, will be solemnized on</p>
+        <p style={{ letterSpacing: '8px', fontSize: '1.2rem', fontWeight: '700' }}>FRIDAY | 14 | AUGUST</p>
       </motion.div>
 
       <Countdown />
@@ -147,22 +151,19 @@ const Page2 = ({ onNext }) => (
     className="page-container"
   >
     <div className="glass-card">
-      <motion.h2 variants={itemVariants} className="script-text" style={{ fontSize: '3rem', marginBottom: '2rem', color: 'var(--royal-gold)' }}>With Love & Blessings</motion.h2>
+      <motion.h2 variants={itemVariants} className="script-text" style={{ fontSize: '2.5rem', marginBottom: '2.5rem', color: 'var(--gold)' }}>With the blessings of Almighty Allah</motion.h2>
       
       <motion.div variants={itemVariants} className="family-section">
-        <h3 style={{ marginBottom: '0.5rem', fontSize: '1rem', letterSpacing: '3px' }}>The Groom</h3>
-        <p className="script-text" style={{ fontSize: '2.2rem', marginBottom: '0.5rem' }}>Mohamed Sanad</p>
-        <p style={{ fontSize: '1.1rem', opacity: 0.8 }}>Son of Mr. Shamsudheen Vellathur</p>
-        <p style={{ fontSize: '1.1rem', opacity: 0.8 }}>& Mrs. Jemsheera C.P</p>
+        <h3 style={{ marginBottom: '0.5rem', fontSize: '1rem', letterSpacing: '3px' }}>The Groom's Parents</h3>
+        <p className="script-text" style={{ fontSize: '2.2rem', marginBottom: '0.5rem' }}>Mr. Shamsudheen & Mrs. Jemsheera</p>
+        <p style={{ fontSize: '1rem', opacity: 0.8, letterSpacing: '1px' }}>Vellathur Family</p>
       </motion.div>
 
       <motion.div variants={itemVariants} style={{ margin: '1.5rem 0', opacity: 0.6, fontSize: '1.5rem' }}>✧</motion.div>
 
       <motion.div variants={itemVariants} className="family-section">
-        <h3 style={{ marginBottom: '0.5rem', fontSize: '1rem', letterSpacing: '3px' }}>The Bride</h3>
-        <p className="script-text" style={{ fontSize: '2.2rem', marginBottom: '0.5rem' }}>Rafna Shani</p>
-        <p style={{ fontSize: '1.1rem', opacity: 0.8 }}>Daughter of Mr. Ismail</p>
-        <p style={{ fontSize: '1.1rem', opacity: 0.8 }}>& Mrs. Fathima</p>
+        <h3 style={{ marginBottom: '0.5rem', fontSize: '1rem', letterSpacing: '3px' }}>The Bride's Parents</h3>
+        <p className="script-text" style={{ fontSize: '2.2rem', marginBottom: '0.5rem' }}>Mr. Ismail & Mrs. Fathima</p>
       </motion.div>
 
       <motion.button variants={itemVariants} className="btn-primary" onClick={onNext}>
@@ -181,21 +182,21 @@ const Page3 = ({ onNext }) => (
     className="page-container"
   >
     <div className="glass-card">
-      <motion.h2 variants={itemVariants} style={{ marginBottom: '2.5rem', fontSize: '2.2rem' }}>The Celebration</motion.h2>
+      <motion.h2 variants={itemVariants} style={{ marginBottom: '2.5rem', fontSize: '2.2rem', letterSpacing: '4px' }}>WEDDING CELEBRATION</motion.h2>
       
       <motion.div variants={itemVariants} className="detail-item">
-        <Calendar size={22} color="var(--royal-gold)" />
-        <p style={{ fontSize: '1.2rem' }}>Sunday, 10 May 2026</p>
+        <Calendar size={22} color="var(--gold)" />
+        <p style={{ fontSize: '1.3rem', letterSpacing: '2px' }}>FRIDAY | 14 | AUGUST 2026</p>
       </motion.div>
       
       <motion.div variants={itemVariants} className="detail-item">
-        <Clock size={22} color="var(--royal-gold)" />
-        <p style={{ fontSize: '1.2rem' }}>4:00 PM – 8:00 PM</p>
+        <Clock size={22} color="var(--gold)" />
+        <p style={{ fontSize: '1.2rem', letterSpacing: '1px' }}>Nikah: 10:30 AM | Reception: 4:00 PM</p>
       </motion.div>
 
       <motion.div variants={itemVariants} className="detail-item" style={{ alignItems: 'flex-start' }}>
-        <MapPin size={22} color="var(--royal-gold)" style={{ marginTop: '5px' }} />
-        <p style={{ fontSize: '1.2rem' }}>Kunhimmu Auditorium<br/><span style={{ fontSize: '0.9rem', opacity: 0.7 }}>P.C. Padi, Ezhur, Tirur</span></p>
+        <MapPin size={22} color="var(--gold)" style={{ marginTop: '5px' }} />
+        <p style={{ fontSize: '1.2rem', letterSpacing: '1px' }}>Kunhimmu Auditorium<br/><span style={{ fontSize: '0.9rem', opacity: 0.7 }}>P.C. Padi, Ezhur, Tirur</span></p>
       </motion.div>
 
       <motion.div variants={itemVariants} className="map-placeholder">
