@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Cinzel:wght@400;700;900&family=Amiri:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Cinzel:wght@400;700;900&family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Cormorant+Garamond:wght@700&display=swap');
 
 :root {
   --burgundy: #4D0404;
@@ -9,6 +9,7 @@
   --font-heading: 'Playfair Display', serif;
   --font-arabic: 'Amiri', serif;
   --font-ornate: 'Cinzel', serif;
+  --font-monogram: 'Cormorant Garamond', serif;
 }
 
 * {
@@ -91,38 +92,14 @@ h1, h2, h3 {
   position: relative;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Perfect Centering */
   overflow: hidden;
-  background-image: url('/assets/premium-paper.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-color: #FAF9F6; /* Solid Cream/Off-White */
+  padding: 20px; /* Mobile Padding */
 }
 
-/* Double-Line Gold Frame */
-.app-container::before {
-  content: '';
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  right: 12px;
-  bottom: 12px;
-  border: 1.5px solid var(--gold);
-  pointer-events: none;
-  z-index: 50;
-}
-
-.app-container::after {
-  content: '';
-  position: absolute;
-  top: 18px;
-  left: 18px;
-  right: 18px;
-  bottom: 18px;
-  border: 0.5px solid var(--gold);
-  pointer-events: none;
-  z-index: 50;
-  opacity: 0.5;
-}
+/* Removed Royal Frame and Textures */
 
 .page-container {
   flex: 1;
@@ -136,13 +113,16 @@ h1, h2, h3 {
 }
 
 .glass-card {
-  background: transparent;
-  padding: 3.5rem 2rem;
+  background: white;
+  padding: 3rem 2.5rem;
   max-width: 500px;
-  width: 90%;
+  width: 100%;
   text-align: center;
   position: relative;
   z-index: 20;
+  border: 1px solid #E5E4E2; /* Subtle border */
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05); /* Soft shadow */
+  border-radius: 2px;
 }
 
 .glass-card::before {
@@ -230,8 +210,8 @@ h1, h2, h3 {
   text-transform: uppercase;
   letter-spacing: 2px;
   opacity: 0.8;
-  font-weight: 700;
-  color: #333; /* Darker for readability on light paper */
+  font-weight: 400;
+  color: #666;
 }
 
 /* Crest Styles */

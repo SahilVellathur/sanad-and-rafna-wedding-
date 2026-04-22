@@ -118,21 +118,19 @@ const Page1 = ({ onNext }) => (
     className="page-container"
   >
     <div className="glass-card">
-      <div className="bismillah">﷽</div>
-      <motion.h2 variants={itemVariants} className="script-text" style={{ fontSize: '4.5rem', margin: '1rem 0', color: 'var(--gold)' }}>S & R</motion.h2>
+      <div className="bismillah" style={{ marginBottom: '1.5rem', fontSize: '1.4rem' }}>﷽</div>
+      <motion.h2 variants={itemVariants} style={{ fontFamily: 'var(--font-monogram)', fontSize: '3.5rem', fontWeight: '700', marginBottom: '1.5rem', color: 'var(--gold)' }}>S & R</motion.h2>
       
-      <motion.p variants={itemVariants} style={{ fontSize: '0.85rem', letterSpacing: '2px', color: '#444', marginBottom: '2rem', textTransform: 'uppercase', lineHeight: '1.6', fontWeight: '700' }}>
+      <motion.p variants={itemVariants} style={{ fontSize: '0.8rem', letterSpacing: '2px', color: '#666', marginBottom: '1.5rem', textTransform: 'uppercase', fontWeight: '400' }}>
         Mr. & Mrs. request the pleasure of your company<br/>
         at the Marriage of their son
       </motion.p>
       
-      <motion.h1 variants={itemVariants} style={{ fontSize: '3.2rem', letterSpacing: '8px', color: 'var(--gold)', marginBottom: '0.8rem' }}>SANAD</motion.h1>
-      <motion.p variants={itemVariants} style={{ fontSize: '1.2rem', margin: '0.5rem 0', fontStyle: 'italic', color: '#444' }}>&</motion.p>
-      <motion.h1 variants={itemVariants} style={{ fontSize: '3.2rem', letterSpacing: '8px', color: 'var(--gold)', marginTop: '0.8rem' }}>RAFNA</motion.h1>
+      <motion.h1 variants={itemVariants} style={{ fontSize: '2rem', letterSpacing: '2px', color: 'var(--gold)', marginBottom: '0.5rem', fontWeight: '700' }}>SANAD and RAFNA</motion.h1>
       
-      <motion.div variants={itemVariants} style={{ margin: '2rem 0', borderTop: '1px solid rgba(212, 175, 55, 0.2)', paddingTop: '2rem' }}>
-        <p style={{ textTransform: 'uppercase', letterSpacing: '4px', fontSize: '0.9rem', marginBottom: '0.8rem', color: '#444', fontWeight: '700' }}>The Nikah, Insha'Allah, will be solemnized on</p>
-        <p style={{ letterSpacing: '8px', fontSize: '1.2rem', fontWeight: '700', color: 'var(--gold)' }}>FRIDAY | 14 | AUGUST</p>
+      <motion.div variants={itemVariants} style={{ margin: '1.5rem 0', borderTop: '1px solid #E5E4E2', paddingTop: '1.5rem' }}>
+        <p style={{ textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.85rem', marginBottom: '0.5rem', color: '#666' }}>The Nikah, Insha'Allah, will be solemnized on</p>
+        <p style={{ letterSpacing: '4px', fontSize: '1rem', fontWeight: '700', color: 'var(--gold)' }}>FRIDAY | 14 | AUGUST</p>
       </motion.div>
 
       <Countdown />
@@ -153,18 +151,18 @@ const Page2 = ({ onNext }) => (
     className="page-container"
   >
     <div className="glass-card">
-      <motion.h2 variants={itemVariants} className="script-text" style={{ fontSize: '2.2rem', marginBottom: '2.5rem', color: 'var(--gold)' }}>With the blessings of Almighty Allah</motion.h2>
+      <motion.h2 variants={itemVariants} style={{ fontSize: '1.8rem', marginBottom: '2rem', color: 'var(--gold)', letterSpacing: '2px' }}>With the blessings of Almighty Allah</motion.h2>
       
       <motion.div variants={itemVariants} className="family-section">
-        <h3 style={{ marginBottom: '0.5rem', fontSize: '0.9rem', letterSpacing: '3px', color: '#444', fontWeight: '700' }}>THE GROOM'S PARENTS</h3>
-        <p className="script-text" style={{ fontSize: '2rem', marginBottom: '0.5rem', color: 'var(--gold)' }}>Mr. Shamsudheen & Mrs. Jemsheera</p>
+        <h3 style={{ marginBottom: '0.5rem', fontSize: '0.85rem', letterSpacing: '2px', color: '#666', fontWeight: '700' }}>THE GROOM'S PARENTS</h3>
+        <p style={{ fontSize: '1.5rem', marginBottom: '0.3rem', color: 'var(--gold)', fontFamily: 'var(--font-monogram)' }}>Mr. Shamsudheen & Mrs. Jemsheera</p>
       </motion.div>
 
-      <motion.div variants={itemVariants} style={{ margin: '1.5rem 0', opacity: 0.3, fontSize: '1.5rem', color: 'var(--gold)' }}>✧</motion.div>
+      <motion.div variants={itemVariants} style={{ margin: '1rem 0', opacity: 0.2, fontSize: '1.2rem', color: 'var(--gold)' }}>✧</motion.div>
 
       <motion.div variants={itemVariants} className="family-section">
-        <h3 style={{ marginBottom: '0.5rem', fontSize: '0.9rem', letterSpacing: '3px', color: '#444', fontWeight: '700' }}>THE BRIDE'S PARENTS</h3>
-        <p className="script-text" style={{ fontSize: '2rem', marginBottom: '0.5rem', color: 'var(--gold)' }}>Mr. Ismail & Mrs. Fathima</p>
+        <h3 style={{ marginBottom: '0.5rem', fontSize: '0.85rem', letterSpacing: '2px', color: '#666', fontWeight: '700' }}>THE BRIDE'S PARENTS</h3>
+        <p style={{ fontSize: '1.5rem', marginBottom: '0.3rem', color: 'var(--gold)', fontFamily: 'var(--font-monogram)' }}>Mr. Ismail & Mrs. Fathima</p>
       </motion.div>
 
       <motion.button variants={itemVariants} className="btn-primary" onClick={onNext}>
