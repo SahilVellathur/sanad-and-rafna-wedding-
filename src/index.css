@@ -92,9 +92,9 @@ h1, h2, h3 {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  background-image: url('/assets/mughal-invitation.png');
+  background-image: url('/assets/symmetric-mughal-arch.png');
   background-size: cover;
-  background-position: center;
+  background-position: center top;
   background-repeat: no-repeat;
   /* Royal Vignette */
   box-shadow: inset 0 0 200px rgba(0, 0, 0, 0.7);
@@ -145,29 +145,29 @@ h1, h2, h3 {
   padding: 1.2rem 2.5rem;
   background: transparent;
   color: var(--gold);
-  border: 1.5px solid var(--gold);
-  border-radius: 15px 5px 15px 5px; /* Ornamental plaque shape */
+  border: 1px solid var(--gold);
+  border-radius: 4px; /* Rectangular plaque shape */
   font-family: var(--font-heading);
   font-size: 1rem;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease;
-  letter-spacing: 2px;
+  letter-spacing: 4px;
   text-transform: uppercase;
   outline: none;
 }
 
 .btn-primary:active {
   background: var(--burgundy) !important;
-  box-shadow: 0 0 25px var(--gold);
-  transform: scale(0.95);
+  box-shadow: 0 0 30px var(--gold);
+  transform: scale(0.98);
 }
 
 .btn-rsvp {
   padding: 1.2rem;
-  background: rgba(77, 4, 4, 0.3);
+  background: rgba(77, 4, 4, 0.4);
   border: 1px solid var(--gold);
-  border-radius: 12px 3px;
+  border-radius: 4px;
   font-family: var(--font-heading);
   font-size: 0.9rem;
   font-weight: 700;
@@ -176,7 +176,7 @@ h1, h2, h3 {
   color: var(--gold);
   outline: none;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
 }
 
 .btn-rsvp:active {
