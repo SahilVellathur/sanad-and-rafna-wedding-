@@ -115,7 +115,7 @@ const GlassCard = ({ children, className = "" }) => (
     animate="visible"
     exit="exit"
     style={{ background: 'rgba(255, 255, 255, 0.4)', backdropFilter: 'blur(12px)' }}
-    className={`border border-[#BC987E]/20 rounded-[2.5rem] p-8 md:p-10 shadow-2xl w-[92%] max-w-[380px] mx-4 flex flex-col items-center justify-center min-h-[500px] text-center z-10 my-8 ${className}`}
+    className={`border border-[#BC987E]/20 rounded-[2.5rem] p-8 md:p-10 shadow-2xl w-[92%] max-w-[380px] mx-4 flex flex-col items-center justify-between h-auto max-h-[85vh] text-center z-10 my-8 ${className}`}
   >
     {children}
   </motion.div>
@@ -141,7 +141,7 @@ const MatteButton = ({ onClick, text, icon: Icon, secondary = false, className =
     } : {}}
     transition={!secondary ? { repeat: Infinity, duration: 3, ease: "easeInOut" } : {}}
     onClick={onClick}
-    className={`${secondary ? 'border border-[#BC987E] text-[#BC987E]' : 'bg-[#BC987E] text-white shadow-md'} w-full py-4 rounded-full font-montserrat text-[10px] font-bold tracking-[0.4em] uppercase active:bg-[#FFFDF5] active:text-[#D4AF37] active:shadow-[0_0_20px_#D4AF37] transition-all flex items-center justify-center gap-2 touch-manipulation ${className}`}
+    className={`${secondary ? 'border border-[#BC987E] text-[#BC987E]' : 'bg-[#BC987E] text-white shadow-md'} w-full py-3.5 md:py-4 rounded-full font-montserrat text-[10px] font-bold tracking-[0.4em] uppercase active:bg-[#FFFDF5] active:text-[#D4AF37] active:shadow-[0_0_20px_#D4AF37] transition-all flex items-center justify-center gap-2 touch-manipulation ${className}`}
     style={{ WebkitTapHighlightColor: 'transparent' }}
   >
     {text} {Icon && <Icon size={14} className={text.includes('Yes') ? 'fill-white' : ''} />}
@@ -245,8 +245,8 @@ export default function App() {
       <AnimatePresence mode="wait">
         {/* Page 1: Landing */}
         {page === 1 && (
-          <GlassCard key="p1" className="gap-y-6">
-            <motion.div variants={itemVariants} className="text-[#BC987E] text-xl md:text-2xl font-serif">﷽</motion.div>
+          <GlassCard key="p1">
+            <motion.div variants={itemVariants} className="text-[#BC987E] text-xl md:text-2xl font-serif mt-2">﷽</motion.div>
             <motion.div variants={itemVariants} className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-white/20 flex items-center justify-center shadow-inner border border-[#BC987E]/20">
               <span className="text-[#BC987E] font-playfair text-2xl md:text-3xl font-bold tracking-tighter">S & R</span>
             </motion.div>
@@ -268,14 +268,14 @@ export default function App() {
                 </div>
               ))}
             </motion.div>
-            <MatteButton onClick={next} text="Open Invitation" icon={Heart} />
+            <MatteButton onClick={next} text="Open Invitation" icon={Heart} className="mb-4" />
           </GlassCard>
         )}
 
         {/* Page 2: Family Details */}
         {page === 2 && (
-          <GlassCard key="p2" className="gap-y-8">
-            <motion.div variants={itemVariants}>
+          <GlassCard key="p2">
+            <motion.div variants={itemVariants} className="mt-2">
               <h2 className="text-[#BC987E] font-playfair text-xl md:text-2xl font-bold uppercase tracking-[0.3em]">With Love & Blessings</h2>
             </motion.div>
             <motion.div variants={itemVariants} className="space-y-6 md:space-y-8 w-full px-4">
@@ -295,13 +295,13 @@ export default function App() {
                 </div>
               </div>
             </motion.div>
-            <MatteButton onClick={next} text="Next 👉" />
+            <MatteButton onClick={next} text="Next 👉" className="mb-4" />
           </GlassCard>
         )}
 
         {/* Page 3: Event Details */}
         {page === 3 && (
-          <GlassCard key="p3" className="gap-y-6">
+          <GlassCard key="p3">
             <motion.div variants={itemVariants} className="mt-2">
               <h2 className="text-[#BC987E] font-playfair text-xl md:text-2xl font-bold uppercase tracking-[0.3em]">Wedding Details</h2>
             </motion.div>
@@ -323,21 +323,21 @@ export default function App() {
                 width="100%" height="100%" style={{ border: 0 }} allowFullScreen="" loading="lazy"
               ></iframe>
             </motion.div>
-            <MatteButton onClick={next} text="Continue" className="mt-4" />
+            <MatteButton onClick={next} text="Continue" className="mb-4" />
           </GlassCard>
         )}
 
         {/* Page 4: RSVP */}
         {page === 4 && (
-          <GlassCard key="p4" className="gap-y-8 justify-center">
-            <motion.div variants={itemVariants}>
-              <h2 className="text-[#BC987E] font-playfair text-xl md:text-2xl font-bold uppercase tracking-[0.3em]">Will you join us?</h2>
+          <GlassCard key="p4">
+            <motion.div variants={itemVariants} className="mt-2">
+              <h2 className="text-[#BC987E] font-playfair text-2xl font-bold uppercase tracking-[0.3em]">Will you join us?</h2>
             </motion.div>
             {rsvpStatus ? (
-              <motion.div variants={itemVariants} className="space-y-8 w-full px-4">
-                <div className="bg-white/10 p-8 rounded-3xl border border-[#BC987E]/10 shadow-md">
+              <motion.div variants={itemVariants} className="flex flex-col items-center justify-center h-full w-full px-4 space-y-6">
+                <div className="bg-white/10 p-6 rounded-3xl border border-[#BC987E]/10 shadow-md w-full">
                   <Heart className="text-[#BC987E] mx-auto mb-4 opacity-50" size={40} fill="#BC987E" />
-                  <p className="text-[#D4AF37] font-montserrat text-sm md:text-base leading-relaxed font-bold mb-6 px-4 text-center">
+                  <p className="text-[#D4AF37] font-montserrat text-sm leading-relaxed font-bold mb-4 px-4 text-center">
                     We would be honored by your presence. <br/>
                     Please try your best to join us and share in our joy!
                   </p>
@@ -345,7 +345,7 @@ export default function App() {
                 </div>
               </motion.div>
             ) : (
-              <div className="flex flex-col gap-y-4 items-center w-full px-4">
+              <div className="flex flex-col gap-y-3 items-center w-full px-4 mb-6">
                 <MatteButton onClick={() => { playMusic(); setRsvpStatus('yes'); }} text="Yes, I will attend" icon={Heart} className="w-[85%]" />
                 <MatteButton onClick={() => { playMusic(); setRsvpStatus('no'); }} text="Sorry, I can't attend" icon={X} secondary className="w-[85%]" />
               </div>
