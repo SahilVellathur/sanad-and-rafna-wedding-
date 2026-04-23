@@ -115,7 +115,7 @@ const GlassCard = ({ children, className = "" }) => (
     animate="visible"
     exit="exit"
     style={{ background: 'rgba(255, 255, 255, 0.4)', backdropFilter: 'blur(12px)' }}
-    className={`border border-[#BC987E]/20 rounded-[2.5rem] p-8 md:p-10 shadow-2xl w-[92%] max-w-[380px] flex flex-col items-center justify-around min-h-[500px] text-center z-10 my-8 ${className}`}
+    className={`border border-[#BC987E]/20 rounded-[2.5rem] p-8 md:p-10 shadow-2xl w-[92%] max-w-[380px] mx-4 flex flex-col items-center justify-center min-h-[500px] text-center z-10 my-8 ${className}`}
   >
     {children}
   </motion.div>
@@ -132,7 +132,7 @@ const PaginationDots = ({ current, total }) => (
   </div>
 );
 
-const MatteButton = ({ onClick, text, icon: Icon, secondary = false }) => (
+const MatteButton = ({ onClick, text, icon: Icon, secondary = false, className = "" }) => (
   <motion.button 
     variants={itemVariants}
     whileTap={{ scale: 0.95 }}
@@ -141,7 +141,7 @@ const MatteButton = ({ onClick, text, icon: Icon, secondary = false }) => (
     } : {}}
     transition={!secondary ? { repeat: Infinity, duration: 3, ease: "easeInOut" } : {}}
     onClick={onClick}
-    className={`${secondary ? 'border border-[#BC987E] text-[#BC987E]' : 'bg-[#BC987E] text-white shadow-md'} w-full py-4 rounded-full font-montserrat text-[10px] font-bold tracking-[0.4em] uppercase active:bg-[#FFFDF5] active:text-[#D4AF37] active:shadow-[0_0_20px_#D4AF37] transition-all flex items-center justify-center gap-2 touch-manipulation`}
+    className={`${secondary ? 'border border-[#BC987E] text-[#BC987E]' : 'bg-[#BC987E] text-white shadow-md'} w-full py-4 rounded-full font-montserrat text-[10px] font-bold tracking-[0.4em] uppercase active:bg-[#FFFDF5] active:text-[#D4AF37] active:shadow-[0_0_20px_#D4AF37] transition-all flex items-center justify-center gap-2 touch-manipulation ${className}`}
     style={{ WebkitTapHighlightColor: 'transparent' }}
   >
     {text} {Icon && <Icon size={14} className={text.includes('Yes') ? 'fill-white' : ''} />}
@@ -204,7 +204,7 @@ export default function App() {
       <AnimatePresence mode="wait">
         {/* Page 1: Landing */}
         {page === 1 && (
-          <GlassCard key="p1">
+          <GlassCard key="p1" className="gap-y-6">
             <motion.div variants={itemVariants} className="text-[#BC987E] text-xl md:text-2xl font-serif">﷽</motion.div>
             <motion.div variants={itemVariants} className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-white/20 flex items-center justify-center shadow-inner border border-[#BC987E]/20">
               <span className="text-[#BC987E] font-playfair text-2xl md:text-3xl font-bold tracking-tighter">S & R</span>
@@ -233,7 +233,7 @@ export default function App() {
 
         {/* Page 2: Family Details */}
         {page === 2 && (
-          <GlassCard key="p2">
+          <GlassCard key="p2" className="gap-y-8">
             <motion.div variants={itemVariants}>
               <h2 className="text-[#BC987E] font-playfair text-xl md:text-2xl font-bold uppercase tracking-[0.3em]">With Love & Blessings</h2>
             </motion.div>
@@ -260,35 +260,35 @@ export default function App() {
 
         {/* Page 3: Event Details */}
         {page === 3 && (
-          <GlassCard key="p3">
-            <motion.div variants={itemVariants}>
+          <GlassCard key="p3" className="gap-y-6">
+            <motion.div variants={itemVariants} className="mt-2">
               <h2 className="text-[#BC987E] font-playfair text-xl md:text-2xl font-bold uppercase tracking-[0.3em]">Wedding Details</h2>
             </motion.div>
-            <motion.div variants={itemVariants} className="space-y-5 md:space-y-6 w-full px-4">
-              <div className="bg-white/10 p-5 rounded-2xl border border-[#BC987E]/10 shadow-sm">
+            <motion.div variants={itemVariants} className="space-y-5 w-full px-4">
+              <div className="bg-white/10 py-4 px-2 rounded-2xl border border-[#BC987E]/10 shadow-sm mx-auto max-w-[280px]">
                 <p className="text-[#2D2D2D] font-bold text-lg md:text-xl font-playfair">Sunday, 10 May 2026</p>
-                <p className="text-[9px] md:text-[10px] tracking-[0.3em] opacity-60 text-[#2D2D2D] font-montserrat uppercase mt-2">4:00 PM - 8:00 PM</p>
+                <p className="text-[9px] md:text-[10px] tracking-[0.3em] opacity-60 text-[#2D2D2D] font-montserrat uppercase mt-1">4:00 PM - 8:00 PM</p>
               </div>
               <div className="space-y-1">
                 <p className="text-[#BC987E] font-bold uppercase text-[8px] md:text-[9px] tracking-[0.5em] font-montserrat">Venue</p>
                 <p className="font-playfair text-lg md:text-xl text-[#2D2D2D] font-bold">Kunhimmu Auditorium</p>
-                <p className="text-[9px] md:text-[10px] opacity-70 text-[#2D2D2D] font-montserrat uppercase tracking-wider">P.C. Padi, Ezhur, Tirur, Kerala</p>
+                <p className="text-xs md:text-[10px] opacity-70 text-[#2D2D2D] font-montserrat uppercase tracking-wider">P.C. Padi, Ezhur, Tirur, Kerala</p>
               </div>
             </motion.div>
-            <motion.div variants={itemVariants} className="w-[95%] h-32 md:h-36 rounded-2xl overflow-hidden border border-[#BC987E]/10 shadow-md">
+            <motion.div variants={itemVariants} className="w-[95%] h-[120px] md:h-36 rounded-2xl overflow-hidden border border-[#BC987E]/10 shadow-md">
               <iframe 
                 title="Venue" 
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3917.634853456071!2d75.93502167504386!3d10.91533048924203!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba7b185abdf736b%3A0xbbdee7e267492d35!2sKUNHIMMU%20AUDITORIUM!5e0!3m2!1sen!2sin" 
                 width="100%" height="100%" style={{ border: 0 }} allowFullScreen="" loading="lazy"
               ></iframe>
             </motion.div>
-            <MatteButton onClick={next} text="Continue" />
+            <MatteButton onClick={next} text="Continue" className="mt-4" />
           </GlassCard>
         )}
 
         {/* Page 4: RSVP */}
         {page === 4 && (
-          <GlassCard key="p4">
+          <GlassCard key="p4" className="gap-y-8">
             <motion.div variants={itemVariants}>
               <h2 className="text-[#BC987E] font-playfair text-xl md:text-2xl font-bold uppercase tracking-[0.3em]">Will you join us?</h2>
             </motion.div>
