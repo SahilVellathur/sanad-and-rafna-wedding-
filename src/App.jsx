@@ -338,10 +338,11 @@ export default function App() {
               <motion.div variants={itemVariants} className="space-y-8 w-full px-4">
                 <div className="bg-white/10 p-8 rounded-3xl border border-[#BC987E]/10 shadow-md">
                   <Heart className="text-[#BC987E] mx-auto mb-4 opacity-50" size={40} fill="#BC987E" />
-                  <p className="text-[#2D2D2D] font-playfair text-lg leading-relaxed font-medium">
-                    Thank you for letting us know. <br/>
-                    <span className="text-[#BC987E] italic font-bold mt-2 block">With Love, Vellathur Family</span>
+                  <p className="text-[#D4AF37] font-montserrat text-sm md:text-base leading-relaxed font-medium px-4">
+                    We would be honored by your presence. <br/>
+                    Please try your best to join us and share in our joy!
                   </p>
+                  <span className="text-[#BC987E] font-dancing text-2xl mt-4 block">With Love, Vellathur Family</span>
                 </div>
               </motion.div>
             ) : (
