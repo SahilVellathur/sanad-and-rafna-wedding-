@@ -1,6 +1,20 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-imperial-navy: #001220;
+  --color-emerald-royal: #003322;
+  --color-charcoal: #121212;
+  --color-gold: #D4AF37;
+  --color-parchment: #FDFCF0;
+  --color-champagne: #F7E7CE;
+  
+  --font-playfair: "Playfair Display", serif;
+  --font-inter: Inter, sans-serif;
+  --font-bodoni: "Bodoni Moda", serif;
+  --font-montserrat: Montserrat, sans-serif;
+  
+  --shadow-soft: 0 10px 30px -5px rgba(0, 0, 0, 0.3);
+}
 
 /* Force removal of default mobile tap highlights and outlines */
 * {

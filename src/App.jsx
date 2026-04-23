@@ -38,18 +38,30 @@ const NextButton = ({ onClick, text = "NEXT" }) => (
 // --- Page Components ---
 
 const StationeryLanding = ({ onOpen }) => (
-  <div className="flex flex-col items-center justify-center min-h-screen bg-[#002366] text-center gap-8 p-6">
-    <div className="text-gold text-4xl mb-4 font-serif">﷽</div>
-    <div className="font-playfair text-gold text-2xl tracking-[0.5em] mb-2 uppercase opacity-80">S & R</div>
-    <h1 className="font-playfair text-gold text-6xl md:text-8xl font-light mb-4 leading-tight">
-      Sanad <br /> & <br /> Rafna
+  <div className="flex flex-col items-center justify-center min-h-screen w-full text-center p-6 bg-[#FAF9F6] font-playfair">
+    {/* 1. Bismillah */}
+    <div className="text-[#D4AF37] text-4xl mb-10 font-serif">﷽</div>
+    
+    {/* 2. S & R Monogram */}
+    <div className="text-[#D4AF37] text-xl tracking-[0.6em] mb-4 uppercase opacity-80">
+      S & R
+    </div>
+    
+    {/* 3. Sanad & Rafna */}
+    <h1 className="text-[#D4AF37] text-5xl md:text-7xl font-bold mb-8 leading-tight">
+      Sanad & Rafna
     </h1>
-    <p className="font-montserrat text-gold text-sm md:text-base tracking-[6px] uppercase mb-8">
+    
+    {/* 4. Wedding Invitation */}
+    <p className="text-[#D4AF37]/70 text-[10px] md:text-xs tracking-[0.5em] uppercase mb-20 font-montserrat">
       Wedding Invitation
     </p>
+    
+    {/* 5. OPEN INVITATION Button */}
     <button 
       onClick={onOpen}
-      className="royal-btn-feedback border border-gold text-white px-[30px] py-[12px] rounded-sm tracking-[3px] text-xs font-montserrat transition-all duration-500 hover:bg-gold hover:text-[#002366]"
+      className="transition-all duration-100 active:bg-[#002366] active:text-white active:shadow-[0_0_25px_rgba(255,255,255,0.9)] focus:outline-none border border-[#D4AF37] text-[#D4AF37] px-12 py-4 rounded-full tracking-[4px] text-[10px] font-montserrat uppercase font-bold"
+      style={{ WebkitTapHighlightColor: 'transparent' }}
     >
       OPEN INVITATION
     </button>
