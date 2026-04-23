@@ -164,7 +164,6 @@ export default function App() {
       if (document.hidden) {
         audioRef.current.pause();
       } else {
-        // Only resume if it was playing and not muted by user
         if (!isMuted) {
           audioRef.current.play().catch(e => console.log("Resume blocked", e));
         }
@@ -330,7 +329,7 @@ export default function App() {
 
         {/* Page 4: RSVP */}
         {page === 4 && (
-          <GlassCard key="p4" className="gap-y-8">
+          <GlassCard key="p4" className="gap-y-8 justify-center">
             <motion.div variants={itemVariants}>
               <h2 className="text-[#BC987E] font-playfair text-xl md:text-2xl font-bold uppercase tracking-[0.3em]">Will you join us?</h2>
             </motion.div>
@@ -338,17 +337,17 @@ export default function App() {
               <motion.div variants={itemVariants} className="space-y-8 w-full px-4">
                 <div className="bg-white/10 p-8 rounded-3xl border border-[#BC987E]/10 shadow-md">
                   <Heart className="text-[#BC987E] mx-auto mb-4 opacity-50" size={40} fill="#BC987E" />
-                  <p className="text-[#D4AF37] font-montserrat text-sm md:text-base leading-relaxed font-medium px-4">
+                  <p className="text-[#D4AF37] font-montserrat text-sm md:text-base leading-relaxed font-bold mb-6 px-4 text-center">
                     We would be honored by your presence. <br/>
                     Please try your best to join us and share in our joy!
                   </p>
-                  <span className="text-[#BC987E] font-dancing text-2xl mt-4 block">With Love, Vellathur Family</span>
+                  <span className="text-[#D4AF37] font-dancing text-2xl mt-4 block">With Love, Vellathur Family</span>
                 </div>
               </motion.div>
             ) : (
-              <div className="flex flex-col gap-5 w-full px-4">
-                <MatteButton onClick={() => { playMusic(); setRsvpStatus('yes'); }} text="Yes, I will attend" icon={Heart} />
-                <MatteButton onClick={() => { playMusic(); setRsvpStatus('no'); }} text="Sorry, I can't attend" icon={X} secondary />
+              <div className="flex flex-col gap-y-4 items-center w-full px-4">
+                <MatteButton onClick={() => { playMusic(); setRsvpStatus('yes'); }} text="Yes, I will attend" icon={Heart} className="w-[85%]" />
+                <MatteButton onClick={() => { playMusic(); setRsvpStatus('no'); }} text="Sorry, I can't attend" icon={X} secondary className="w-[85%]" />
               </div>
             )}
           </GlassCard>
