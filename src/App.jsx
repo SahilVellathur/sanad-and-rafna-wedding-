@@ -34,7 +34,13 @@ const useCountdown = (targetDate) => {
 // --- Animation Components ---
 
 const FallingPetals = () => {
-  const petals = Array.from({ length: 15 });
+  const [petalCount, setPetalCount] = useState(12);
+
+  useEffect(() => {
+    if (window.innerWidth < 768) setPetalCount(10);
+  }, []);
+
+  const petals = Array.from({ length: petalCount });
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
       {petals.map((_, i) => (
@@ -109,7 +115,7 @@ const GlassCard = ({ children, className = "" }) => (
     animate="visible"
     exit="exit"
     style={{ background: 'rgba(255, 255, 255, 0.4)', backdropFilter: 'blur(12px)' }}
-    className={`border border-[#BC987E]/20 rounded-[2.5rem] p-10 shadow-2xl max-w-md w-[90%] flex flex-col items-center justify-around min-h-[500px] text-center z-10 ${className}`}
+    className={`border border-[#BC987E]/20 rounded-[2.5rem] p-8 md:p-10 shadow-2xl w-[92%] max-w-[380px] flex flex-col items-center justify-around min-h-[500px] text-center z-10 my-8 ${className}`}
   >
     {children}
   </motion.div>
@@ -135,7 +141,7 @@ const MatteButton = ({ onClick, text, icon: Icon, secondary = false }) => (
     } : {}}
     transition={!secondary ? { repeat: Infinity, duration: 3, ease: "easeInOut" } : {}}
     onClick={onClick}
-    className={`${secondary ? 'border border-[#BC987E] text-[#BC987E]' : 'bg-[#BC987E] text-white shadow-md'} w-full py-4 rounded-full font-montserrat text-[10px] font-bold tracking-[0.4em] uppercase active:bg-[#FFFDF5] active:text-[#D4AF37] active:shadow-[0_0_20px_#D4AF37] transition-all flex items-center justify-center gap-2`}
+    className={`${secondary ? 'border border-[#BC987E] text-[#BC987E]' : 'bg-[#BC987E] text-white shadow-md'} w-full py-4 rounded-full font-montserrat text-[10px] font-bold tracking-[0.4em] uppercase active:bg-[#FFFDF5] active:text-[#D4AF37] active:shadow-[0_0_20px_#D4AF37] transition-all flex items-center justify-center gap-2 touch-manipulation`}
     style={{ WebkitTapHighlightColor: 'transparent' }}
   >
     {text} {Icon && <Icon size={14} className={text.includes('Yes') ? 'fill-white' : ''} />}
@@ -171,7 +177,7 @@ export default function App() {
 
   return (
     <div 
-      className="min-h-screen w-full flex items-center justify-center bg-cover bg-center p-4 relative overflow-hidden"
+      className="min-h-[100dvh] w-full flex flex-col items-center justify-center bg-cover bg-center p-4 relative overflow-hidden"
       style={{ backgroundImage: 'url(/assets/bg.png)' }}
     >
       <div className="absolute inset-0 bg-black/[0.03] pointer-events-none"></div>
@@ -187,7 +193,7 @@ export default function App() {
       {/* Audio Toggle UI */}
       <button 
         onClick={toggleMute}
-        className="fixed top-6 right-6 z-50 p-3 rounded-full bg-white/20 backdrop-blur-md border border-[#BC987E]/30 text-[#BC987E] shadow-lg active:bg-[#FFFDF5] active:text-[#D4AF37] active:shadow-[0_0_20px_#D4AF37] active:scale-95 transition-all"
+        className="fixed top-6 right-6 z-50 p-3 rounded-full bg-white/20 backdrop-blur-md border border-[#BC987E]/30 text-[#BC987E] shadow-lg active:bg-[#FFFDF5] active:text-[#D4AF37] active:shadow-[0_0_20px_#D4AF37] active:scale-95 transition-all touch-manipulation"
         style={{ WebkitTapHighlightColor: 'transparent' }}
       >
         {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
@@ -199,12 +205,12 @@ export default function App() {
         {/* Page 1: Landing */}
         {page === 1 && (
           <GlassCard key="p1">
-            <motion.div variants={itemVariants} className="text-[#BC987E] text-2xl font-serif">﷽</motion.div>
-            <motion.div variants={itemVariants} className="w-24 h-24 rounded-full bg-white/20 flex items-center justify-center shadow-inner border border-[#BC987E]/20">
-              <span className="text-[#BC987E] font-playfair text-3xl font-bold tracking-tighter">S & R</span>
+            <motion.div variants={itemVariants} className="text-[#BC987E] text-xl md:text-2xl font-serif">﷽</motion.div>
+            <motion.div variants={itemVariants} className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-white/20 flex items-center justify-center shadow-inner border border-[#BC987E]/20">
+              <span className="text-[#BC987E] font-playfair text-2xl md:text-3xl font-bold tracking-tighter">S & R</span>
             </motion.div>
             <motion.div variants={itemVariants} className="space-y-3">
-              <h1 className="text-[#2D2D2D] font-playfair text-3xl md:text-4xl font-bold leading-tight">
+              <h1 className="text-[#2D2D2D] font-playfair text-2xl md:text-3xl font-bold leading-tight">
                 Mohamed Sanad <br/> & <br/> Rafna Shani
               </h1>
             </motion.div>
@@ -215,8 +221,8 @@ export default function App() {
                 { label: 'Min', val: timeLeft.minutes },
                 { label: 'Sec', val: timeLeft.seconds }
               ].map((item, i) => (
-                <div key={i} className="flex flex-col items-center min-w-[45px]">
-                  <span className="text-2xl tabular-nums">{String(item.val).padStart(2, '0')}</span>
+                <div key={i} className="flex flex-col items-center min-w-[40px]">
+                  <span className="text-xl md:text-2xl tabular-nums">{String(item.val).padStart(2, '0')}</span>
                   <span className="text-[7px] uppercase tracking-widest opacity-60">{item.label}</span>
                 </div>
               ))}
@@ -229,22 +235,22 @@ export default function App() {
         {page === 2 && (
           <GlassCard key="p2">
             <motion.div variants={itemVariants}>
-              <h2 className="text-[#BC987E] font-playfair text-2xl font-bold uppercase tracking-[0.3em]">With Love & Blessings</h2>
+              <h2 className="text-[#BC987E] font-playfair text-xl md:text-2xl font-bold uppercase tracking-[0.3em]">With Love & Blessings</h2>
             </motion.div>
-            <motion.div variants={itemVariants} className="space-y-8 w-full px-4">
+            <motion.div variants={itemVariants} className="space-y-6 md:space-y-8 w-full px-4">
               <div className="space-y-1">
-                <p className="text-[#BC987E]/60 text-[9px] uppercase tracking-[0.4em] font-bold font-montserrat">The Groom Side</p>
+                <p className="text-[#BC987E]/60 text-[8px] md:text-[9px] uppercase tracking-[0.4em] font-bold font-montserrat">The Groom Side</p>
                 <div className="text-[#2D2D2D] font-playfair">
-                  <p className="text-xl font-bold">Mohamed Sanad</p>
-                  <p className="text-xs font-montserrat opacity-70 mt-1 leading-relaxed">Son of Mr. Shamsudheen Vellathur <br/> & Mrs. Jemsheera C.P</p>
+                  <p className="text-lg md:text-xl font-bold">Mohamed Sanad</p>
+                  <p className="text-[10px] md:text-xs font-montserrat opacity-70 mt-1 leading-relaxed">Son of Mr. Shamsudheen Vellathur <br/> & Mrs. Jemsheera C.P</p>
                 </div>
               </div>
-              <div className="text-[#BC987E] font-dancing text-2xl opacity-40">&</div>
+              <div className="text-[#BC987E] font-dancing text-xl md:text-2xl opacity-40">&</div>
               <div className="space-y-1">
-                <p className="text-[#BC987E]/60 text-[9px] uppercase tracking-[0.4em] font-bold font-montserrat">The Bride Side</p>
+                <p className="text-[#BC987E]/60 text-[8px] md:text-[9px] uppercase tracking-[0.4em] font-bold font-montserrat">The Bride Side</p>
                 <div className="text-[#2D2D2D] font-playfair">
-                  <p className="text-xl font-bold">Rafna Shani</p>
-                  <p className="text-xs font-montserrat opacity-70 mt-1 leading-relaxed">Daughter of Mr. Ismail <br/> & Mrs. Fathima</p>
+                  <p className="text-lg md:text-xl font-bold">Rafna Shani</p>
+                  <p className="text-[10px] md:text-xs font-montserrat opacity-70 mt-1 leading-relaxed">Daughter of Mr. Ismail <br/> & Mrs. Fathima</p>
                 </div>
               </div>
             </motion.div>
@@ -256,20 +262,20 @@ export default function App() {
         {page === 3 && (
           <GlassCard key="p3">
             <motion.div variants={itemVariants}>
-              <h2 className="text-[#BC987E] font-playfair text-2xl font-bold uppercase tracking-[0.3em]">Wedding Details</h2>
+              <h2 className="text-[#BC987E] font-playfair text-xl md:text-2xl font-bold uppercase tracking-[0.3em]">Wedding Details</h2>
             </motion.div>
-            <motion.div variants={itemVariants} className="space-y-6 w-full px-4">
-              <div className="bg-white/10 p-6 rounded-2xl border border-[#BC987E]/10 shadow-sm">
-                <p className="text-[#2D2D2D] font-bold text-xl font-playfair">Sunday, 10 May 2026</p>
-                <p className="text-[10px] tracking-[0.3em] opacity-60 text-[#2D2D2D] font-montserrat uppercase mt-2">4:00 PM - 8:00 PM</p>
+            <motion.div variants={itemVariants} className="space-y-5 md:space-y-6 w-full px-4">
+              <div className="bg-white/10 p-5 rounded-2xl border border-[#BC987E]/10 shadow-sm">
+                <p className="text-[#2D2D2D] font-bold text-lg md:text-xl font-playfair">Sunday, 10 May 2026</p>
+                <p className="text-[9px] md:text-[10px] tracking-[0.3em] opacity-60 text-[#2D2D2D] font-montserrat uppercase mt-2">4:00 PM - 8:00 PM</p>
               </div>
               <div className="space-y-1">
-                <p className="text-[#BC987E] font-bold uppercase text-[9px] tracking-[0.5em] font-montserrat">Venue</p>
-                <p className="font-playfair text-xl text-[#2D2D2D] font-bold">Kunhimmu Auditorium</p>
-                <p className="text-[10px] opacity-70 text-[#2D2D2D] font-montserrat uppercase tracking-wider">P.C. Padi, Ezhur, Tirur, Kerala</p>
+                <p className="text-[#BC987E] font-bold uppercase text-[8px] md:text-[9px] tracking-[0.5em] font-montserrat">Venue</p>
+                <p className="font-playfair text-lg md:text-xl text-[#2D2D2D] font-bold">Kunhimmu Auditorium</p>
+                <p className="text-[9px] md:text-[10px] opacity-70 text-[#2D2D2D] font-montserrat uppercase tracking-wider">P.C. Padi, Ezhur, Tirur, Kerala</p>
               </div>
             </motion.div>
-            <motion.div variants={itemVariants} className="w-[95%] h-36 rounded-2xl overflow-hidden border border-[#BC987E]/10 shadow-md">
+            <motion.div variants={itemVariants} className="w-[95%] h-32 md:h-36 rounded-2xl overflow-hidden border border-[#BC987E]/10 shadow-md">
               <iframe 
                 title="Venue" 
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3917.634853456071!2d75.93502167504386!3d10.91533048924203!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba7b185abdf736b%3A0xbbdee7e267492d35!2sKUNHIMMU%20AUDITORIUM!5e0!3m2!1sen!2sin" 
@@ -284,7 +290,7 @@ export default function App() {
         {page === 4 && (
           <GlassCard key="p4">
             <motion.div variants={itemVariants}>
-              <h2 className="text-[#BC987E] font-playfair text-2xl font-bold uppercase tracking-[0.3em]">Will you join us?</h2>
+              <h2 className="text-[#BC987E] font-playfair text-xl md:text-2xl font-bold uppercase tracking-[0.3em]">Will you join us?</h2>
             </motion.div>
             {rsvpStatus ? (
               <motion.div variants={itemVariants} className="space-y-8 w-full px-4">
@@ -295,7 +301,7 @@ export default function App() {
                     <span className="text-[#BC987E] italic font-bold mt-2 block">With Love, Vellathur Family</span>
                   </p>
                 </div>
-                <button onClick={() => setPage(1)} className="text-[#BC987E] text-[10px] uppercase tracking-[0.5em] font-bold font-montserrat hover:text-[#2D2D2D] active:bg-[#FFFDF5] active:text-[#D4AF37] active:shadow-[0_0_20px_#D4AF37] transition-colors" style={{ WebkitTapHighlightColor: 'transparent' }}>Restart</button>
+                <button onClick={() => setPage(1)} className="text-[#BC987E] text-[10px] uppercase tracking-[0.5em] font-bold font-montserrat hover:text-[#2D2D2D] active:bg-[#FFFDF5] active:text-[#D4AF37] active:shadow-[0_0_20px_#D4AF37] transition-colors touch-manipulation" style={{ WebkitTapHighlightColor: 'transparent' }}>Restart</button>
               </motion.div>
             ) : (
               <div className="flex flex-col gap-5 w-full px-4">
