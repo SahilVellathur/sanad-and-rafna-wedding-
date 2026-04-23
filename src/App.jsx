@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Heart, X, Volume2, VolumeX, Flower } from 'lucide-react';
+import { Heart, X, Volume2, VolumeX } from 'lucide-react';
 
 const WEDDING_DATE = new Date('2026-05-10T16:00:00');
 
@@ -31,91 +31,15 @@ const useCountdown = (targetDate) => {
   return timeLeft;
 };
 
-// --- Animation Components ---
-
-const FallingPetals = () => {
-  const [petalCount, setPetalCount] = useState(12);
-
-  useEffect(() => {
-    if (window.innerWidth < 768) setPetalCount(10);
-  }, []);
-
-  const petals = Array.from({ length: petalCount });
-  return (
-    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-      {petals.map((_, i) => (
-        <motion.div
-          key={i}
-          initial={{ 
-            top: -20, 
-            left: `${Math.random() * 100}%`, 
-            opacity: 0,
-            rotate: 0,
-            scale: 0.5 + Math.random()
-          }}
-          animate={{ 
-            top: '110vh', 
-            left: `${(Math.random() * 100) + (Math.sin(i) * 20)}%`,
-            opacity: [0, 0.4, 0.4, 0],
-            rotate: [0, 180, 360, 540]
-          }}
-          transition={{ 
-            duration: 15 + Math.random() * 15, 
-            repeat: Infinity, 
-            delay: Math.random() * 20,
-            ease: "linear"
-          }}
-          className="absolute"
-          style={{ 
-            width: '8px', 
-            height: '12px', 
-            borderRadius: '100% 0% 100% 0%',
-            backgroundColor: i % 2 === 0 ? '#F5F5DC' : '#BC987E',
-            boxShadow: '0 0 5px rgba(188,152,126,0.1)'
-          }}
-        />
-      ))}
-    </div>
-  );
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { 
-    opacity: 1, 
-    y: 0,
-    transition: { 
-      duration: 0.8, 
-      ease: "easeOut",
-      staggerChildren: 0.2
-    } 
-  },
-  exit: { 
-    opacity: 0, 
-    y: -20, 
-    transition: { duration: 0.5, ease: "easeIn" } 
-  }
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 15 },
-  visible: { 
-    opacity: 1, 
-    y: 0, 
-    transition: { duration: 0.6, ease: "easeOut" } 
-  }
-};
-
 // --- Components ---
 
 const GlassCard = ({ children, className = "" }) => (
   <motion.div 
-    variants={cardVariants}
-    initial="hidden"
-    animate="visible"
-    exit="exit"
-    style={{ background: 'rgba(255, 255, 255, 0.4)', backdropFilter: 'blur(12px)' }}
-    className={`border border-[#BC987E]/20 rounded-[2.5rem] py-4 px-6 md:p-10 shadow-2xl w-[92%] max-w-[380px] mx-4 flex flex-col items-center justify-center h-auto max-h-[85vh] overflow-y-auto text-center z-10 my-8 ${className}`}
+    initial={{ opacity: 0, y: 0 }}
+    animate={{ opacity: 1, y: 0 }}
+    exit={{ opacity: 0, y: 0 }}
+    transition={{ duration: 0.5 }}
+    className={`bg-white/40 backdrop-blur-md border border-white/20 rounded-[2.5rem] p-8 md:p-10 shadow-2xl w-[92%] max-w-[380px] flex flex-col items-center justify-center gap-y-6 text-center z-10 max-h-[90dvh] overflow-y-auto ${className}`}
   >
     {children}
   </motion.div>
@@ -133,19 +57,13 @@ const PaginationDots = ({ current, total }) => (
 );
 
 const MatteButton = ({ onClick, text, icon: Icon, secondary = false, className = "" }) => (
-  <motion.button 
-    variants={itemVariants}
-    whileTap={{ scale: 0.95 }}
-    animate={!secondary ? { 
-      boxShadow: ["0 0 0px rgba(188,152,126,0)", "0 0 15px rgba(188,152,126,0.3)", "0 0 0px rgba(188,152,126,0)"]
-    } : {}}
-    transition={!secondary ? { repeat: Infinity, duration: 3, ease: "easeInOut" } : {}}
+  <button 
     onClick={onClick}
-    className={`${secondary ? 'border border-[#BC987E] text-[#BC987E]' : 'bg-[#BC987E] text-white shadow-md'} w-full max-w-[280px] py-3 md:py-4 rounded-full font-montserrat text-[10px] font-bold tracking-[0.4em] uppercase active:bg-[#FFFDF5] active:text-[#D4AF37] active:shadow-[0_0_20px_#D4AF37] transition-all flex items-center justify-center gap-2 touch-manipulation ${className}`}
+    className={`${secondary ? 'border border-[#BC987E] text-[#BC987E]' : 'bg-[#BC987E] text-white shadow-md'} w-full max-w-[280px] py-3 md:py-4 rounded-full font-montserrat text-[10px] font-bold tracking-[0.4em] uppercase transition-all flex items-center justify-center gap-2 touch-manipulation active:bg-[#FFFDF5] active:text-[#D4AF37] active:shadow-[0_0_20px_#D4AF37] ${className}`}
     style={{ WebkitTapHighlightColor: 'transparent' }}
   >
     {text} {Icon && <Icon size={14} className={text.includes('Yes') ? 'fill-white' : ''} />}
-  </motion.button>
+  </button>
 );
 
 export default function App() {
@@ -156,38 +74,18 @@ export default function App() {
   const timeLeft = useCountdown(WEDDING_DATE);
   const audioRef = useRef(null);
 
-  // Handle visibility change to pause/resume music
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (!audioRef.current || !audioStarted) return;
-
       if (document.hidden) {
         audioRef.current.pause();
-      } else {
-        if (!isMuted) {
-          audioRef.current.play().catch(e => console.log("Resume blocked", e));
-        }
-      }
-    };
-
-    const handlePageShowHide = (e) => {
-      if (!audioRef.current || !audioStarted) return;
-      if (e.type === 'pagehide') {
-        audioRef.current.pause();
-      } else if (e.type === 'pageshow' && !document.hidden && !isMuted) {
+      } else if (!isMuted) {
         audioRef.current.play().catch(e => console.log("Resume blocked", e));
       }
     };
 
     document.addEventListener('visibilitychange', handleVisibilityChange);
-    window.addEventListener('pagehide', handlePageShowHide);
-    window.addEventListener('pageshow', handlePageShowHide);
-
-    return () => {
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
-      window.removeEventListener('pagehide', handlePageShowHide);
-      window.removeEventListener('pageshow', handlePageShowHide);
-    };
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
   }, [audioStarted, isMuted]);
 
   const playMusic = () => {
@@ -199,9 +97,7 @@ export default function App() {
   };
 
   const next = () => {
-    if (page === 1) {
-      playMusic();
-    }
+    if (page === 1) playMusic();
     setPage(p => Math.min(p + 1, 4));
   };
 
@@ -210,52 +106,37 @@ export default function App() {
       const newMuted = !isMuted;
       audioRef.current.muted = newMuted;
       setIsMuted(newMuted);
-      if (!newMuted) {
-        audioRef.current.play().catch(e => console.log("Play blocked", e));
-      }
+      if (!newMuted) audioRef.current.play().catch(e => console.log("Play blocked", e));
     }
   };
 
   return (
     <div 
-      className="min-h-[100dvh] w-full flex flex-col items-center justify-center bg-cover bg-center p-4 relative overflow-hidden"
+      className="min-h-[100dvh] w-full flex flex-col items-center justify-center bg-cover bg-center bg-no-repeat p-4 relative overflow-hidden bg-fixed"
       style={{ backgroundImage: 'url(/assets/bg.png)' }}
     >
-      <div className="absolute inset-0 bg-black/[0.03] pointer-events-none"></div>
+      <div className="absolute inset-0 bg-black/[0.02] pointer-events-none"></div>
       
-      {/* Background Music */}
-      <audio 
-        ref={audioRef}
-        src="/assets/wedding-nasheed.mp3"
-        loop
-        autoPlay={false}
-      />
+      <audio ref={audioRef} src="/assets/wedding-nasheed.mp3" loop autoPlay={false} />
 
-      {/* Audio Toggle UI */}
       <button 
         onClick={toggleMute}
-        className="fixed top-6 right-6 z-50 p-3 rounded-full bg-white/20 backdrop-blur-md border border-[#BC987E]/30 text-[#BC987E] shadow-lg active:bg-[#FFFDF5] active:text-[#D4AF37] active:shadow-[0_0_20px_#D4AF37] active:scale-95 transition-all touch-manipulation scale-90"
-        style={{ WebkitTapHighlightColor: 'transparent' }}
+        className="fixed top-6 right-6 z-50 p-3 rounded-full bg-white/20 backdrop-blur-md border border-white/20 text-[#BC987E] shadow-lg transition-all scale-90"
       >
         {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
       </button>
 
-      <FallingPetals />
-
       <AnimatePresence mode="wait">
-        {/* Page 1: Landing */}
         {page === 1 && (
           <GlassCard key="p1">
-            <motion.div variants={itemVariants} className="text-[#BC987E] text-xl md:text-2xl font-serif mt-2">﷽</motion.div>
-            <motion.div variants={itemVariants} className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-white/20 flex items-center justify-center shadow-inner border border-[#BC987E]/20">
+            <div className="text-[#BC987E] text-2xl font-serif">﷽</div>
+            <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-white/20 flex items-center justify-center shadow-inner border border-white/20">
               <span className="text-[#BC987E] font-playfair text-2xl md:text-3xl font-bold tracking-tighter">S & R</span>
-            </motion.div>
-            <motion.div variants={itemVariants} className="space-y-3">
-              <h1 className="text-[#2D2D2D] font-playfair text-2xl md:text-3xl font-bold leading-tight">
-                Mohamed Sanad <br/> & <br/> Rafna Shani
-              </h1>
-            </motion.div>
-            <motion.div variants={itemVariants} className="flex gap-4 text-[#BC987E] font-montserrat font-bold">
+            </div>
+            <h1 className="text-[#2D2D2D] font-playfair text-2xl md:text-3xl font-bold leading-tight">
+              Mohamed Sanad <br/> & <br/> Rafna Shani
+            </h1>
+            <div className="flex gap-4 text-[#BC987E] font-montserrat font-bold">
               {[
                 { label: 'Days', val: timeLeft.days },
                 { label: 'Hrs', val: timeLeft.hours },
@@ -267,93 +148,73 @@ export default function App() {
                   <span className="text-[7px] uppercase tracking-widest opacity-60">{item.label}</span>
                 </div>
               ))}
-            </motion.div>
-            <MatteButton onClick={next} text="Open Invitation" icon={Heart} className="mb-4" />
+            </div>
+            <MatteButton onClick={next} text="Open Invitation" icon={Heart} />
           </GlassCard>
         )}
 
-        {/* Page 2: Family Details */}
         {page === 2 && (
           <GlassCard key="p2">
-            <motion.div variants={itemVariants} className="mt-2">
-              <h2 className="text-[#BC987E] font-playfair text-xl md:text-2xl font-bold uppercase tracking-[0.3em]">With Love & Blessings</h2>
-            </motion.div>
-            <motion.div variants={itemVariants} className="space-y-6 md:space-y-8 w-full px-4">
-              <div className="space-y-1">
-                <p className="text-[#BC987E]/60 text-[8px] md:text-[9px] uppercase tracking-[0.4em] font-bold font-montserrat">The Groom Side</p>
-                <div className="text-[#2D2D2D] font-playfair">
-                  <p className="text-lg md:text-xl font-bold">Mohamed Sanad</p>
-                  <p className="text-sm font-montserrat opacity-70 mt-1 leading-relaxed">Son of Mr. Shamsudheen Vellathur <br/> & Mrs. Jemsheera C.P</p>
-                </div>
+            <h2 className="text-[#BC987E] font-playfair text-xl md:text-2xl font-bold uppercase tracking-[0.3em]">With Love & Blessings</h2>
+            <div className="space-y-1">
+              <p className="text-[#BC987E]/60 text-[8px] md:text-[9px] uppercase tracking-[0.4em] font-bold font-montserrat">The Groom Side</p>
+              <div className="text-[#2D2D2D] font-playfair">
+                <p className="text-lg md:text-xl font-bold">Mohamed Sanad</p>
+                <p className="text-sm font-montserrat opacity-70 mt-1 leading-relaxed">Son of Mr. Shamsudheen Vellathur <br/> & Mrs. Jemsheera C.P</p>
               </div>
-              <div className="text-[#BC987E] font-dancing text-xl md:text-2xl opacity-40">&</div>
-              <div className="space-y-1">
-                <p className="text-[#BC987E]/60 text-[8px] md:text-[9px] uppercase tracking-[0.4em] font-bold font-montserrat">The Bride Side</p>
-                <div className="text-[#2D2D2D] font-playfair">
-                  <p className="text-lg md:text-xl font-bold">Rafna Shani</p>
-                  <p className="text-sm font-montserrat opacity-70 mt-1 leading-relaxed">Daughter of Mr. Ismail <br/> & Mrs. Fathima</p>
-                </div>
+            </div>
+            <div className="text-[#BC987E] font-dancing text-2xl opacity-40">&</div>
+            <div className="space-y-1">
+              <p className="text-[#BC987E]/60 text-[8px] md:text-[9px] uppercase tracking-[0.4em] font-bold font-montserrat">The Bride Side</p>
+              <div className="text-[#2D2D2D] font-playfair">
+                <p className="text-lg md:text-xl font-bold">Rafna Shani</p>
+                <p className="text-sm font-montserrat opacity-70 mt-1 leading-relaxed">Daughter of Mr. Ismail <br/> & Mrs. Fathima</p>
               </div>
-            </motion.div>
-            <MatteButton onClick={next} text="Next 👉" className="mb-4" />
+            </div>
+            <MatteButton onClick={next} text="Next 👉" />
           </GlassCard>
         )}
 
-        {/* Page 3: Event Details */}
         {page === 3 && (
           <GlassCard key="p3">
-            <motion.div variants={itemVariants} className="mt-2">
-              <h2 className="text-[#BC987E] font-playfair text-xl md:text-2xl font-bold uppercase tracking-[0.3em]">Wedding Details</h2>
-            </motion.div>
-            <motion.div variants={itemVariants} className="space-y-5 w-full px-4">
-              <div className="bg-white/10 py-4 px-2 rounded-2xl border border-[#BC987E]/10 shadow-sm mx-auto max-w-[280px]">
-                <p className="text-[#2D2D2D] font-bold text-lg md:text-xl font-playfair">Sunday, 10 May 2026</p>
-                <p className="text-[9px] md:text-[10px] tracking-[0.3em] opacity-60 text-[#2D2D2D] font-montserrat uppercase mt-1">4:00 PM - 8:00 PM</p>
-              </div>
-              <div className="space-y-1">
-                <p className="text-[#BC987E] font-bold uppercase text-[8px] md:text-[9px] tracking-[0.5em] font-montserrat">Venue</p>
-                <p className="font-playfair text-lg md:text-xl text-[#2D2D2D] font-bold">Kunhimmu Auditorium</p>
-                <p className="text-xs md:text-[10px] opacity-70 text-[#2D2D2D] font-montserrat uppercase tracking-wider">P.C. Padi, Ezhur, Tirur, Kerala</p>
-              </div>
-            </motion.div>
-            <motion.div variants={itemVariants} className="w-[95%] h-[120px] md:h-36 rounded-2xl overflow-hidden border border-[#BC987E]/10 shadow-md">
+            <h2 className="text-[#BC987E] font-playfair text-xl md:text-2xl font-bold uppercase tracking-[0.3em]">Wedding Details</h2>
+            <div className="bg-white/10 py-4 px-2 rounded-2xl border border-white/10 shadow-sm w-full max-w-[280px]">
+              <p className="text-[#2D2D2D] font-bold text-lg md:text-xl font-playfair">Sunday, 10 May 2026</p>
+              <p className="text-[10px] md:text-[11px] tracking-[0.3em] text-[#2D2D2D] font-montserrat uppercase mt-1 font-bold">4:00 PM - 8:00 PM</p>
+            </div>
+            <div className="space-y-1">
+              <p className="text-[#BC987E] font-bold uppercase text-[8px] md:text-[9px] tracking-[0.5em] font-montserrat">Venue</p>
+              <p className="font-playfair text-lg md:text-xl text-[#2D2D2D] font-bold">Kunhimmu Auditorium</p>
+              <p className="text-xs md:text-[10px] opacity-70 text-[#2D2D2D] font-montserrat uppercase tracking-wider">P.C. Padi, Ezhur, Tirur, Kerala</p>
+            </div>
+            <div className="w-full h-[120px] md:h-36 rounded-2xl overflow-hidden border border-white/10 shadow-md">
               <iframe 
                 title="Venue" 
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3917.634853456071!2d75.93502167504386!3d10.91533048924203!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba7b185abdf736b%3A0xbbdee7e267492d35!2sKUNHIMMU%20AUDITORIUM!5e0!3m2!1sen!2sin" 
                 width="100%" height="100%" style={{ border: 0 }} allowFullScreen="" loading="lazy"
               ></iframe>
-            </motion.div>
-            <MatteButton onClick={next} text="Continue" className="mb-4" />
+            </div>
+            <MatteButton onClick={next} text="Continue" />
           </GlassCard>
         )}
 
-        {/* Page 4: RSVP */}
         {page === 4 && (
           <GlassCard key="p4">
-            <motion.div variants={itemVariants} className="mt-2">
-              <h2 className="text-[#BC987E] font-playfair text-2xl font-bold uppercase tracking-[0.3em]">Will you join us?</h2>
-            </motion.div>
+            <h2 className="text-[#BC987E] font-playfair text-2xl font-bold uppercase tracking-[0.3em]">Will you join us?</h2>
             {rsvpStatus ? (
-              <motion.div variants={itemVariants} className="flex flex-col items-center justify-center h-full w-full px-4 space-y-6">
-                <div className="bg-white/10 p-6 rounded-3xl border border-[#BC987E]/10 shadow-md w-full">
-                  {rsvpStatus === 'yes' ? (
-                    <Heart className="text-[#D4AF37] mx-auto mb-4" size={40} fill="#D4AF37" />
-                  ) : (
-                    <Flower className="text-[#D4AF37] mx-auto mb-4" size={40} fill="#D4AF37" />
-                  )}
-                  <p className="text-[#D4AF37] font-montserrat text-sm leading-relaxed font-bold mb-4 px-4 text-center">
-                    {rsvpStatus === 'yes' 
-                      ? 'Thank you for your love and blessings!' 
-                      : 'We will miss you! Thank you for your well wishes and for being part of our journey.'
-                    }
-                  </p>
-                  <span className="text-[#D4AF37] font-dancing text-2xl mt-4 block">With Love, Vellathur Family</span>
-                </div>
-              </motion.div>
+              <div className="flex flex-col items-center justify-center gap-y-6 w-full py-4">
+                <p className="text-[#BC987E] font-playfair text-lg md:text-xl leading-relaxed text-center px-4 font-bold">
+                  {rsvpStatus === 'yes' 
+                    ? 'Thank you for your love and blessings!' 
+                    : 'We will miss you! Thank you for your well wishes and for being part of our journey.'
+                  }
+                </p>
+                <span className="text-[#BC987E] font-dancing text-2xl font-bold">With Love, Vellathur Family</span>
+              </div>
             ) : (
-              <div className="flex flex-col gap-y-3 items-center w-full px-4 mb-6">
-                <MatteButton onClick={() => { playMusic(); setRsvpStatus('yes'); }} text="Yes, I will attend" icon={Heart} className="w-[85%]" />
-                <MatteButton onClick={() => { playMusic(); setRsvpStatus('no'); }} text="Sorry, I can't attend" icon={X} secondary className="w-[85%]" />
+              <div className="flex flex-col gap-y-4 items-center w-full">
+                <MatteButton onClick={() => { playMusic(); setRsvpStatus('yes'); }} text="Yes, I will attend" icon={Heart} />
+                <MatteButton onClick={() => { playMusic(); setRsvpStatus('no'); }} text="Sorry, I can't attend" icon={X} secondary />
               </div>
             )}
           </GlassCard>
