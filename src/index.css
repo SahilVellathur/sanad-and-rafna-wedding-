@@ -1,17 +1,11 @@
 @import "tailwindcss";
 
 @theme {
-  --color-imperial-navy: #001220;
-  --color-emerald-royal: #003322;
-  --color-charcoal: #121212;
   --color-gold: #D4AF37;
+  --color-bold-ivory: #D4AF37;
+  --color-ivory-border: #E5D9B6;
   --color-soft-gold: #C5A059;
-  --color-champagne-gold: #AF8F4F;
-  --color-ivory: #FFFDF5;
   --color-ivory-solid: #F5F5DC;
-  --color-soft-pink: #E195AB;
-  --color-parchment: #FDFCF0;
-  --color-champagne: #F7E7CE;
   
   --font-playfair: "Playfair Display", serif;
   --font-inter: Inter, sans-serif;
@@ -22,18 +16,11 @@
   --shadow-soft: 0 10px 30px -5px rgba(0, 0, 0, 0.3);
 }
 
-.gold-embossed-effect {
-  background: linear-gradient(135deg, #F5F5DC 0%, #D4AF37 50%, #F5F5DC 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  text-shadow: 0.5px 0.5px 1px rgba(0,0,0,0.3);
-}
-
 .ivory-glass-btn {
-  background: #F5F5DC;
-  color: #000;
-  box-shadow: inset 1px 1px 2px rgba(255,255,255,0.8), inset -1px -1px 2px rgba(0,0,0,0.1), 0 4px 15px rgba(0,0,0,0.1);
-  border: 1px solid #D4AF37;
+  background: #D4AF37;
+  color: #FFF;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+  border: none;
 }
 
 /* Force removal of default mobile tap highlights and outlines */
@@ -44,7 +31,7 @@
 
 @layer base {
   body {
-    @apply bg-ivory text-soft-gold font-inter overflow-x-hidden;
+    @apply bg-white text-black font-inter overflow-x-hidden;
   }
 
   /* Global Button Force-Apply */
@@ -62,59 +49,21 @@
 }
 
 @layer components {
-  .double-border {
-    position: relative;
-    border: 1px solid #D4AF37;
-    padding: 4px;
-  }
-  
-  .double-border::after {
-    content: '';
-    position: absolute;
-    top: 4px;
-    left: 4px;
-    right: 4px;
-    bottom: 4px;
-    border: 1px solid #D4AF37;
-    pointer-events: none;
-  }
-
-  .gold-embossed {
-    @apply font-bodoni text-gold;
-    text-shadow: 0.5px 0.5px 0px rgba(0,0,0,0.5), -0.5px -0.5px 0px rgba(255,255,255,0.2);
-    letter-spacing: 0.1em;
-  }
-
   .glass-card {
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid #C5A059;
-    border-radius: 20px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 2px solid #E5D9B6;
+    border-radius: 2.5rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
     width: 90%;
     max-width: 400px;
+    min-height: 500px;
     padding: 2.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     text-align: center;
-  }
-}
-
-/* Custom animations */
-.fade-in-up {
-  animation: fadeInUp 1.5s ease-out forwards;
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
   }
 }
