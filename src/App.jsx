@@ -152,12 +152,50 @@ export default function App() {
   const [page, setPage] = useState(1);
   const [rsvpStatus, setRsvpStatus] = useState(null);
   const [isMuted, setIsMuted] = useState(false);
+  const [audioStarted, setAudioStarted] = useState(false);
   const timeLeft = useCountdown(WEDDING_DATE);
   const audioRef = useRef(null);
 
+  // Handle visibility change to pause/resume music
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (!audioRef.current || !audioStarted) return;
+
+      if (document.hidden) {
+        audioRef.current.pause();
+      } else {
+        // Only resume if it was playing and not muted by user
+        if (!isMuted) {
+          audioRef.current.play().catch(e => console.log("Resume blocked", e));
+        }
+      }
+    };
+
+    const handlePageShowHide = (e) => {
+      if (!audioRef.current || !audioStarted) return;
+      if (e.type === 'pagehide') {
+        audioRef.current.pause();
+      } else if (e.type === 'pageshow' && !document.hidden && !isMuted) {
+        audioRef.current.play().catch(e => console.log("Resume blocked", e));
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    window.addEventListener('pagehide', handlePageShowHide);
+    window.addEventListener('pageshow', handlePageShowHide);
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('pagehide', handlePageShowHide);
+      window.removeEventListener('pageshow', handlePageShowHide);
+    };
+  }, [audioStarted, isMuted]);
+
   const playMusic = () => {
     if (audioRef.current) {
-      audioRef.current.play().catch(e => console.log("Audio play blocked", e));
+      audioRef.current.play()
+        .then(() => setAudioStarted(true))
+        .catch(e => console.log("Audio play blocked", e));
     }
   };
 
@@ -170,8 +208,12 @@ export default function App() {
 
   const toggleMute = () => {
     if (audioRef.current) {
-      audioRef.current.muted = !isMuted;
-      setIsMuted(!isMuted);
+      const newMuted = !isMuted;
+      audioRef.current.muted = newMuted;
+      setIsMuted(newMuted);
+      if (!newMuted) {
+        audioRef.current.play().catch(e => console.log("Play blocked", e));
+      }
     }
   };
 
