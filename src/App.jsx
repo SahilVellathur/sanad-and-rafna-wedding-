@@ -38,29 +38,29 @@ const NextButton = ({ onClick, text = "NEXT" }) => (
 // --- Page Components ---
 
 const StationeryLanding = ({ onOpen }) => (
-  <div className="flex flex-col items-center justify-center min-h-screen w-full text-center p-6 bg-[#FAF9F6] font-playfair">
+  <div className="flex flex-col items-center justify-center min-h-screen w-full text-center p-6 bg-[#FFFDF5] font-playfair">
     {/* 1. Bismillah */}
-    <div className="text-[#D4AF37] text-4xl mb-10 font-serif">﷽</div>
+    <div className="text-[#C5A059] text-4xl mb-10 font-serif">﷽</div>
     
     {/* 2. S & R Monogram */}
-    <div className="text-[#D4AF37] text-xl tracking-[0.6em] mb-4 uppercase opacity-80">
+    <div className="text-[#C5A059] text-xl tracking-[0.7em] mb-4 uppercase opacity-80">
       S & R
     </div>
     
     {/* 3. Sanad & Rafna */}
-    <h1 className="text-[#D4AF37] text-5xl md:text-7xl font-bold mb-8 leading-tight">
+    <h1 className="text-[#AF8F4F] text-5xl md:text-7xl font-bold mb-8 leading-tight">
       Sanad & Rafna
     </h1>
     
     {/* 4. Wedding Invitation */}
-    <p className="text-[#D4AF37]/70 text-[10px] md:text-xs tracking-[0.5em] uppercase mb-20 font-montserrat">
+    <p className="text-[#C5A059]/70 text-[10px] md:text-xs tracking-[0.6em] uppercase mb-20 font-montserrat font-light">
       Wedding Invitation
     </p>
     
     {/* 5. OPEN INVITATION Button */}
     <button 
       onClick={onOpen}
-      className="transition-all duration-100 active:bg-[#002366] active:text-white active:shadow-[0_0_25px_rgba(255,255,255,0.9)] focus:outline-none border border-[#D4AF37] text-[#D4AF37] px-12 py-4 rounded-full tracking-[4px] text-[10px] font-montserrat uppercase font-bold"
+      className="transition-all duration-100 active:bg-[#002366] active:text-white active:shadow-[0_0_25px_rgba(255,255,255,0.9)] focus:outline-none border border-[#C5A059] text-[#C5A059] px-14 py-4 rounded-full tracking-[5px] text-[10px] font-montserrat uppercase font-bold bg-[#FFFDF5]"
       style={{ WebkitTapHighlightColor: 'transparent' }}
     >
       OPEN INVITATION
