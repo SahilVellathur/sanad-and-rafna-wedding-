@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Heart, X, Volume2, VolumeX } from 'lucide-react';
+import { Heart, X, Volume2, VolumeX, Flower } from 'lucide-react';
 
 const WEDDING_DATE = new Date('2026-05-10T16:00:00');
 
@@ -115,7 +115,7 @@ const GlassCard = ({ children, className = "" }) => (
     animate="visible"
     exit="exit"
     style={{ background: 'rgba(255, 255, 255, 0.4)', backdropFilter: 'blur(12px)' }}
-    className={`border border-[#BC987E]/20 rounded-[2.5rem] p-8 md:p-10 shadow-2xl w-[92%] max-w-[380px] mx-4 flex flex-col items-center justify-between h-auto max-h-[85vh] text-center z-10 my-8 ${className}`}
+    className={`border border-[#BC987E]/20 rounded-[2.5rem] py-6 px-4 md:p-10 shadow-2xl w-[92%] max-w-[380px] mx-4 flex flex-col items-center justify-between h-auto max-h-[85vh] overflow-y-auto text-center z-10 my-8 ${className}`}
   >
     {children}
   </motion.div>
@@ -336,10 +336,16 @@ export default function App() {
             {rsvpStatus ? (
               <motion.div variants={itemVariants} className="flex flex-col items-center justify-center h-full w-full px-4 space-y-6">
                 <div className="bg-white/10 p-6 rounded-3xl border border-[#BC987E]/10 shadow-md w-full">
-                  <Heart className="text-[#BC987E] mx-auto mb-4 opacity-50" size={40} fill="#BC987E" />
+                  {rsvpStatus === 'yes' ? (
+                    <Heart className="text-[#D4AF37] mx-auto mb-4" size={40} fill="#D4AF37" />
+                  ) : (
+                    <Flower className="text-[#D4AF37] mx-auto mb-4" size={40} fill="#D4AF37" />
+                  )}
                   <p className="text-[#D4AF37] font-montserrat text-sm leading-relaxed font-bold mb-4 px-4 text-center">
-                    We would be honored by your presence. <br/>
-                    Please try your best to join us and share in our joy!
+                    {rsvpStatus === 'yes' 
+                      ? 'Thank you for your love and blessings!' 
+                      : 'We will miss you! Thank you for your well wishes and for being part of our journey.'
+                    }
                   </p>
                   <span className="text-[#D4AF37] font-dancing text-2xl mt-4 block">With Love, Vellathur Family</span>
                 </div>
