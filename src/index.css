@@ -1,205 +1,60 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Lora:ital,wght@0,400..700;1,400..700&family=Montserrat:wght@300;400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Amiri:ital,wght@0,400;0,700;1,400;1,700&display=swap');
-
-:root {
-  --royal-cream: #FFFDF5;
-  --gold: #B8860B; /* Darker, premium gold for light background */
-  --gold-glow: rgba(184, 134, 11, 0.2);
-  --burgundy: #4D0404;
-  --ivory: #FFFFF0;
-  
-  --font-heading: 'Playfair Display', serif;
-  --font-body: 'Lora', serif;
-  --font-sans: 'Montserrat', sans-serif;
-  --font-monogram: 'Cormorant Garamond', serif;
-  --font-arabic: 'Amiri', serif;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
   -webkit-tap-highlight-color: transparent;
 }
 
-html, body {
-  height: 100%;
-  width: 100%;
-  overflow-x: hidden;
-  background-color: var(--royal-cream);
-  font-family: var(--font-body);
+@layer base {
+  body {
+    @apply bg-imperial-navy text-parchment font-inter overflow-x-hidden;
+  }
 }
 
-body {
-  margin: 0;
-  color: var(--burgundy);
-  min-height: 100vh;
-  min-height: 100dvh;
-  width: 100vw;
-  user-select: none;
-  position: relative;
+@layer components {
+  .double-border {
+    position: relative;
+    border: 1px solid #D4AF37;
+    padding: 4px;
+  }
+  
+  .double-border::after {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    right: 4px;
+    bottom: 4px;
+    border: 1px solid #D4AF37;
+    pointer-events: none;
+  }
+
+  .gold-embossed {
+    @apply font-bodoni text-gold;
+    text-shadow: 0.5px 0.5px 0px rgba(0,0,0,0.5), -0.5px -0.5px 0px rgba(255,255,255,0.2);
+    letter-spacing: 0.1em;
+  }
+
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-md border border-gold shadow-soft;
+    width: 90%;
+    max-width: 400px;
+  }
 }
 
-/* Thin Gold Screen Border */
-body::before {
-  content: '';
-  position: fixed;
-  top: 15px;
-  left: 15px;
-  right: 15px;
-  bottom: 15px;
-  border: 1px solid var(--gold);
-  pointer-events: none;
-  z-index: 1000;
-  opacity: 0.8;
+/* Custom animations */
+.fade-in-up {
+  animation: fadeInUp 1.5s ease-out forwards;
 }
 
-.app-container {
-  min-height: 100vh;
-  min-height: 100dvh;
-  width: 100%;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  background-color: var(--royal-cream);
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-
-/* Landing Page Specifics */
-.landing-page {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  height: 100vh;
-  width: 90%;
-  max-width: 500px;
-  margin: 0 auto;
-  gap: 2rem; /* Even spacing between elements */
-}
-
-.bismillah-landing {
-  font-family: var(--font-arabic);
-  font-size: clamp(2.5rem, 8vw, 3.5rem);
-  color: var(--gold);
-}
-
-.monogram-landing {
-  font-family: var(--font-monogram);
-  font-size: 3.5rem;
-  font-weight: 300;
-  color: var(--gold);
-  letter-spacing: 12px;
-  text-transform: uppercase;
-}
-
-.names-landing {
-  font-family: var(--font-heading);
-  font-size: clamp(2.2rem, 9vw, 3.5rem);
-  font-weight: 700;
-  color: var(--burgundy);
-  text-transform: uppercase;
-  letter-spacing: 4px;
-  line-height: 1.2;
-}
-
-.event-landing {
-  font-family: var(--font-sans);
-  font-size: 0.9rem;
-  font-weight: 400;
-  color: var(--gold);
-  letter-spacing: 8px;
-  text-transform: uppercase;
-}
-
-/* Buttons */
-.btn-open-landing {
-  padding: 1.2rem 3.5rem;
-  background: transparent;
-  color: var(--burgundy);
-  border: 1px solid var(--gold);
-  font-family: var(--font-sans);
-  font-size: 0.9rem;
-  font-weight: 700;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  outline: none;
-}
-
-.btn-open-landing:active {
-  background: var(--gold-glow);
-  box-shadow: 0 0 20px var(--gold-glow);
-  transform: scale(0.98);
-}
-
-/* Subsequent Pages Glass Card */
-.page-container {
-  position: relative;
-  z-index: 10;
-  width: 90%;
-  max-width: 450px;
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  margin: auto;
-}
-
-.glass-card {
-  padding: 3rem 2rem;
-  background: rgba(255, 253, 245, 0.8);
-  backdrop-filter: blur(10px);
-  border: 1px solid var(--gold);
-  width: 100%;
-}
-
-/* Utility */
-.mute-toggle {
-  position: fixed;
-  top: 30px;
-  right: 30px;
-  z-index: 1100;
-  background: transparent;
-  border: 1px solid var(--gold);
-  padding: 10px;
-  border-radius: 50%;
-  cursor: pointer;
-  color: var(--gold);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.page-indicator {
-  position: fixed;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 15px;
-  z-index: 1100;
-}
-
-.indicator-dot {
-  width: 8px;
-  height: 8px;
-  border: 1px solid var(--gold);
-  background: transparent;
-  transform: rotate(45deg);
-}
-
-.indicator-dot.active {
-  background: var(--gold);
-}
-
-/* Hidden Elements for Landing */
-.hide-on-landing {
-  display: none !important;
-}
-
