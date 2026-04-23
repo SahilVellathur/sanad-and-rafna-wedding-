@@ -41,6 +41,17 @@
     width: 90%;
     max-width: 400px;
   }
+
+  .royal-btn-feedback {
+    @apply transition-all duration-150;
+  }
+
+  .royal-btn-feedback:active, .royal-btn-feedback:focus {
+    background-color: #002366 !important;
+    color: white !important;
+    box-shadow: 0 0 20px #002366 !important;
+    outline: none;
+  }
 }
 
 /* Custom animations */
