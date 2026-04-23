@@ -224,37 +224,30 @@ const RSVP = () => {
 };
 
 const StationeryLanding = ({ onOpen }) => (
-  <div className="fixed inset-0 z-50 flex items-center justify-center bg-emerald-royal">
-    <motion.div 
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 1.5 }}
-      className="glass-card flex flex-col justify-around items-center h-[80vh] p-8 text-center"
+  <div className="flex flex-col items-center justify-center min-h-screen bg-[#002366] text-center gap-8 p-6">
+    {/* 1. Bismillah */}
+    <div className="text-gold text-4xl mb-4 font-serif">﷽</div>
+
+    {/* 2. S & R Monogram (Optional but kept for continuity unless asked to remove) */}
+    <div className="font-playfair text-gold text-2xl tracking-[0.5em] mb-2 uppercase opacity-80">S & R</div>
+
+    {/* 3. Sanad & Rafna */}
+    <h1 className="font-playfair text-gold text-6xl md:text-8xl font-light mb-4 leading-tight">
+      Sanad <br /> & <br /> Rafna
+    </h1>
+
+    {/* 4. Wedding Invitation */}
+    <p className="font-montserrat text-gold text-sm md:text-base tracking-[6px] uppercase mb-8">
+      Wedding Invitation
+    </p>
+
+    {/* 5. Open Invitation Button */}
+    <button 
+      onClick={onOpen}
+      className="border border-gold text-white px-[30px] py-[12px] rounded-sm tracking-[3px] text-xs font-montserrat transition-all duration-500 hover:bg-gold hover:text-[#002366] active:bg-gold active:text-[#002366]"
     >
-      {/* 1. Bismillah */}
-      <div className="text-gold text-2xl font-serif">﷽</div>
-
-      {/* 2. S & R Monogram */}
-      <div className="font-bodoni text-gold text-6xl md:text-7xl tracking-tighter">S & R</div>
-
-      {/* 3. Sanad & Rafna */}
-      <div className="font-bodoni text-charcoal text-4xl md:text-5xl leading-tight">
-        Sanad <br /> & <br /> Rafna
-      </div>
-
-      {/* 4. Wedding Invitation */}
-      <div className="font-montserrat text-gold text-[10px] md:text-xs tracking-[3px] uppercase">
-        Wedding Invitation
-      </div>
-
-      {/* 5. Open Invitation Button */}
-      <button 
-        onClick={onOpen}
-        className="bg-gold text-white px-10 py-3 rounded-full tracking-[2px] text-[10px] md:text-xs font-montserrat shadow-lg shadow-gold/20 hover:shadow-white/50 active:shadow-white/50 transition-all duration-300"
-      >
-        OPEN INVITATION
-      </button>
-    </motion.div>
+      OPEN INVITATION
+    </button>
   </div>
 );
 
