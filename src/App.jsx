@@ -344,7 +344,7 @@ export default function App() {
                   <p className="text-[#D4AF37] font-montserrat text-sm leading-relaxed font-bold mb-4 px-4 text-center">
                     {rsvpStatus === 'yes' 
                       ? 'Thank you for your love and blessings!' 
-                      : 'We will miss you! Thank you for your well wishes and for being part of our journey.'
+                      : 'We would be honored by your presence. Please try your best to join us and share in our joy!'
                     }
                   </p>
                   <span className="text-[#D4AF37] font-dancing text-2xl mt-4 block">With Love, Vellathur Family</span>
