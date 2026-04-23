@@ -45,11 +45,11 @@ const GlassCard = ({ children, className = "" }) => (
 );
 
 const PaginationDots = ({ current, total }) => (
-  <div className="fixed bottom-10 left-0 right-0 flex justify-center gap-2 z-20">
+  <div className="fixed bottom-6 left-0 right-0 flex justify-center gap-2 z-20">
     {[...Array(total)].map((_, i) => (
       <div 
         key={i} 
-        className={`w-2 h-2 rounded-full transition-all duration-300 ${i + 1 === current ? 'bg-soft-pink w-6' : 'bg-soft-pink/30'}`}
+        className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${i + 1 === current ? 'bg-soft-pink w-4' : 'bg-soft-pink/20'}`}
       />
     ))}
   </div>
@@ -137,29 +137,33 @@ export default function App() {
 
         {/* Page 3: Event Details */}
         {page === 3 && (
-          <GlassCard key="p3">
-            <h2 className="text-gold font-playfair text-3xl font-bold uppercase tracking-widest">Wedding Details</h2>
-            <div className="space-y-4 text-black">
-              <div className="space-y-1">
-                <p className="text-soft-pink font-bold text-lg">Sunday, 10 May 2026</p>
-                <p className="text-xs tracking-widest opacity-70">4:00 PM - 8:00 PM</p>
-              </div>
-              <div className="space-y-1">
-                <p className="text-gold font-bold uppercase text-[10px] tracking-widest">Venue</p>
-                <p className="font-playfair text-lg">Kunhimmu Auditorium</p>
-                <p className="text-[10px] opacity-60">P.C. Padi, Ezhur, Tirur, Kerala</p>
+          <GlassCard key="p3" className="min-h-[480px] justify-between py-10 px-6">
+            <div className="w-full">
+              <h2 className="text-gold font-playfair text-2xl font-bold uppercase tracking-[0.2em] mb-8">Wedding Details</h2>
+              <div className="space-y-6 w-full">
+                <div className="bg-soft-pink/10 p-4 rounded-2xl border border-soft-pink/20">
+                  <p className="text-soft-pink font-bold text-xl font-playfair">Sunday, 10 May 2026</p>
+                  <p className="text-[10px] tracking-[0.2em] opacity-70 text-black uppercase mt-1">4:00 PM - 8:00 PM</p>
+                </div>
+                <div className="space-y-1">
+                  <p className="text-gold font-bold uppercase text-[10px] tracking-[0.3em]">Venue</p>
+                  <p className="font-playfair text-xl text-black font-bold">Kunhimmu Auditorium</p>
+                  <p className="text-[9px] opacity-60 text-black font-montserrat uppercase tracking-wider">P.C. Padi, Ezhur, Tirur, Kerala</p>
+                </div>
               </div>
             </div>
-            <div className="w-full h-40 rounded-2xl overflow-hidden border border-gold/20 shadow-inner">
+            
+            <div className="w-full h-44 rounded-[15px] overflow-hidden border border-gold/20 shadow-md my-4">
               <iframe 
                 title="Venue" 
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3917.634853456071!2d75.93502167504386!3d10.91533048924203!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba7b185abdf736b%3A0xbbdee7e267492d35!2sKUNHIMMU%20AUDITORIUM!5e0!3m2!1sen!2sin" 
                 width="100%" height="100%" style={{ border: 0 }} allowFullScreen="" loading="lazy"
               ></iframe>
             </div>
+
             <button 
               onClick={next}
-              className="bg-soft-pink text-white px-10 py-3 rounded-full font-montserrat text-xs font-bold tracking-widest shadow-lg active:bg-[#002366] transition-all"
+              className="bg-soft-pink text-white w-full py-4 rounded-full font-montserrat text-[10px] font-bold tracking-[0.3em] shadow-lg active:bg-[#002366] transition-all"
             >
               CONTINUE
             </button>
