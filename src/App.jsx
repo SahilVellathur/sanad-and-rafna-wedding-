@@ -135,7 +135,7 @@ const MatteButton = ({ onClick, text, icon: Icon, secondary = false }) => (
     } : {}}
     transition={!secondary ? { repeat: Infinity, duration: 3, ease: "easeInOut" } : {}}
     onClick={onClick}
-    className={`${secondary ? 'border border-[#BC987E] text-[#BC987E]' : 'bg-[#BC987E] text-white shadow-md'} w-full py-4 rounded-full font-montserrat text-[10px] font-bold tracking-[0.4em] uppercase active:bg-[#002366] active:text-white active:shadow-[0_0_20px_rgba(0,35,102,0.6)] transition-all flex items-center justify-center gap-2`}
+    className={`${secondary ? 'border border-[#BC987E] text-[#BC987E]' : 'bg-[#BC987E] text-white shadow-md'} w-full py-4 rounded-full font-montserrat text-[10px] font-bold tracking-[0.4em] uppercase active:bg-[#FFFDF5] active:text-[#D4AF37] active:shadow-[0_0_20px_#D4AF37] transition-all flex items-center justify-center gap-2`}
     style={{ WebkitTapHighlightColor: 'transparent' }}
   >
     {text} {Icon && <Icon size={14} className={text.includes('Yes') ? 'fill-white' : ''} />}
@@ -149,12 +149,15 @@ export default function App() {
   const timeLeft = useCountdown(WEDDING_DATE);
   const audioRef = useRef(null);
 
+  const playMusic = () => {
+    if (audioRef.current) {
+      audioRef.current.play().catch(e => console.log("Audio play blocked", e));
+    }
+  };
+
   const next = () => {
     if (page === 1) {
-      // Start audio on first interaction
-      if (audioRef.current) {
-        audioRef.current.play().catch(e => console.log("Audio play blocked", e));
-      }
+      playMusic();
     }
     setPage(p => Math.min(p + 1, 4));
   };
@@ -180,12 +183,11 @@ export default function App() {
         loop
         autoPlay={false}
       />
-      <script dangerouslySetInnerHTML={{ __html: `document.querySelector('audio').volume = 0.5;` }} />
 
       {/* Audio Toggle UI */}
       <button 
         onClick={toggleMute}
-        className="fixed top-6 right-6 z-50 p-3 rounded-full bg-white/20 backdrop-blur-md border border-[#BC987E]/30 text-[#BC987E] shadow-lg active:scale-95 transition-all"
+        className="fixed top-6 right-6 z-50 p-3 rounded-full bg-white/20 backdrop-blur-md border border-[#BC987E]/30 text-[#BC987E] shadow-lg active:bg-[#FFFDF5] active:text-[#D4AF37] active:shadow-[0_0_20px_#D4AF37] active:scale-95 transition-all"
         style={{ WebkitTapHighlightColor: 'transparent' }}
       >
         {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
@@ -293,12 +295,12 @@ export default function App() {
                     <span className="text-[#BC987E] italic font-bold mt-2 block">With Love, Vellathur Family</span>
                   </p>
                 </div>
-                <button onClick={() => setPage(1)} className="text-[#BC987E] text-[10px] uppercase tracking-[0.5em] font-bold font-montserrat hover:text-[#2D2D2D] transition-colors">Restart</button>
+                <button onClick={() => setPage(1)} className="text-[#BC987E] text-[10px] uppercase tracking-[0.5em] font-bold font-montserrat hover:text-[#2D2D2D] active:bg-[#FFFDF5] active:text-[#D4AF37] active:shadow-[0_0_20px_#D4AF37] transition-colors" style={{ WebkitTapHighlightColor: 'transparent' }}>Restart</button>
               </motion.div>
             ) : (
               <div className="flex flex-col gap-5 w-full px-4">
-                <MatteButton onClick={() => setRsvpStatus('yes')} text="Yes, I will attend" icon={Heart} />
-                <MatteButton onClick={() => setRsvpStatus('no')} text="Sorry, I can't attend" icon={X} secondary />
+                <MatteButton onClick={() => { playMusic(); setRsvpStatus('yes'); }} text="Yes, I will attend" icon={Heart} />
+                <MatteButton onClick={() => { playMusic(); setRsvpStatus('no'); }} text="Sorry, I can't attend" icon={X} secondary />
               </div>
             )}
           </GlassCard>

@@ -41,9 +41,9 @@
 
   button:active, 
   button:focus {
-    background-color: #002366 !important;
-    color: #ffffff !important;
-    box-shadow: 0 0 20px #002366 !important;
+    background-color: #FFFDF5 !important;
+    color: #D4AF37 !important;
+    box-shadow: 0 0 20px #D4AF37 !important;
     transform: scale(0.95) !important;
   }
 }
