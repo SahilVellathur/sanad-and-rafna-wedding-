@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Heart, X, ChevronRight } from 'lucide-react';
+import { Heart, X, Volume2, VolumeX } from 'lucide-react';
 
 const WEDDING_DATE = new Date('2026-05-10T16:00:00');
 
@@ -145,9 +145,26 @@ const MatteButton = ({ onClick, text, icon: Icon, secondary = false }) => (
 export default function App() {
   const [page, setPage] = useState(1);
   const [rsvpStatus, setRsvpStatus] = useState(null);
+  const [isMuted, setIsMuted] = useState(false);
   const timeLeft = useCountdown(WEDDING_DATE);
+  const audioRef = useRef(null);
 
-  const next = () => setPage(p => Math.min(p + 1, 4));
+  const next = () => {
+    if (page === 1) {
+      // Start audio on first interaction
+      if (audioRef.current) {
+        audioRef.current.play().catch(e => console.log("Audio play blocked", e));
+      }
+    }
+    setPage(p => Math.min(p + 1, 4));
+  };
+
+  const toggleMute = () => {
+    if (audioRef.current) {
+      audioRef.current.muted = !isMuted;
+      setIsMuted(!isMuted);
+    }
+  };
 
   return (
     <div 
@@ -156,6 +173,24 @@ export default function App() {
     >
       <div className="absolute inset-0 bg-black/[0.03] pointer-events-none"></div>
       
+      {/* Background Music */}
+      <audio 
+        ref={audioRef}
+        src="/assets/wedding-nasheed.mp3"
+        loop
+        autoPlay={false}
+      />
+      <script dangerouslySetInnerHTML={{ __html: `document.querySelector('audio').volume = 0.5;` }} />
+
+      {/* Audio Toggle UI */}
+      <button 
+        onClick={toggleMute}
+        className="fixed top-6 right-6 z-50 p-3 rounded-full bg-white/20 backdrop-blur-md border border-[#BC987E]/30 text-[#BC987E] shadow-lg active:scale-95 transition-all"
+        style={{ WebkitTapHighlightColor: 'transparent' }}
+      >
+        {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
+      </button>
+
       <FallingPetals />
 
       <AnimatePresence mode="wait">
