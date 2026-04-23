@@ -2,6 +2,36 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MapPin, Calendar, Clock, Check, Volume2, VolumeX, Heart, Info, Send, ChevronRight } from 'lucide-react';
 
+const WEDDING_DATE = new Date('2026-08-14T10:30:00');
+
+// --- Custom Hooks ---
+
+const useCountdown = (targetDate) => {
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      const now = new Date();
+      const difference = targetDate - now;
+
+      if (difference <= 0) {
+        clearInterval(timer);
+      } else {
+        setTimeLeft({
+          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+          minutes: Math.floor((difference / 1000 / 60) % 60),
+          seconds: Math.floor((difference / 1000) % 60),
+        });
+      }
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [targetDate]);
+
+  return timeLeft;
+};
+
 // --- Custom Components ---
 
 const Section = ({ children, className = "" }) => (
@@ -20,6 +50,25 @@ const AnimatedText = ({ text, className = "", delay = 0 }) => (
     {text}
   </motion.div>
 );
+
+const CountdownTimer = ({ targetDate }) => {
+  const { days, hours, minutes, seconds } = useCountdown(targetDate);
+  return (
+    <div className="flex gap-4 text-[#C5A059] font-montserrat mb-8">
+      {[
+        { label: 'Days', value: days },
+        { label: 'Hrs', value: hours },
+        { label: 'Min', value: minutes },
+        { label: 'Sec', value: seconds }
+      ].map((item, idx) => (
+        <div key={idx} className="flex flex-col items-center min-w-[45px]">
+          <span className="text-2xl font-bold tabular-nums">{String(item.value).padStart(2, '0')}</span>
+          <span className="text-[7px] uppercase tracking-[0.2em] opacity-60 font-bold">{item.label}</span>
+        </div>
+      ))}
+    </div>
+  );
+};
 
 const NextButton = ({ onClick, text = "NEXT" }) => (
   <motion.button
@@ -51,9 +100,11 @@ const StationeryLanding = ({ onOpen }) => (
         Sanad & Rafna
       </h1>
       
-      <p className="text-[#C5A059] text-[10px] md:text-xs tracking-[0.6em] uppercase mb-12 font-montserrat font-bold">
-        WEDDING RECEPTION
+      <p className="text-[#C5A059] text-[10px] md:text-xs tracking-[0.6em] uppercase mb-10 font-montserrat font-bold">
+        GRAND RECEPTION
       </p>
+
+      <CountdownTimer targetDate={WEDDING_DATE} />
       
       <button 
         onClick={onOpen}
