@@ -8,6 +8,7 @@
   --color-soft-gold: #C5A059;
   --color-champagne-gold: #AF8F4F;
   --color-ivory: #FFFDF5;
+  --color-soft-pink: #E195AB;
   --color-parchment: #FDFCF0;
   --color-champagne: #F7E7CE;
   
@@ -15,6 +16,7 @@
   --font-inter: Inter, sans-serif;
   --font-bodoni: "Bodoni Moda", serif;
   --font-montserrat: Montserrat, sans-serif;
+  --font-dancing: "Dancing Script", cursive;
   
   --shadow-soft: 0 10px 30px -5px rgba(0, 0, 0, 0.3);
 }
