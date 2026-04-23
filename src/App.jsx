@@ -343,7 +343,6 @@ export default function App() {
                     <span className="text-[#BC987E] italic font-bold mt-2 block">With Love, Vellathur Family</span>
                   </p>
                 </div>
-                <button onClick={() => setPage(1)} className="text-[#BC987E] text-[10px] uppercase tracking-[0.5em] font-bold font-montserrat hover:text-[#2D2D2D] active:bg-[#FFFDF5] active:text-[#D4AF37] active:shadow-[0_0_20px_#D4AF37] transition-colors touch-manipulation" style={{ WebkitTapHighlightColor: 'transparent' }}>Restart</button>
               </motion.div>
             ) : (
               <div className="flex flex-col gap-5 w-full px-4">
