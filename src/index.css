@@ -2,13 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Force removal of default mobile tap highlights and outlines */
 * {
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: transparent !important;
+  outline: none !important;
 }
 
 @layer base {
   body {
     @apply bg-imperial-navy text-parchment font-inter overflow-x-hidden;
+  }
+
+  /* Global Button Force-Apply */
+  button {
+    transition: all 0.1s ease-in-out !important;
+  }
+
+  button:active, 
+  button:focus {
+    background-color: #002366 !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 20px #002366 !important;
+    transform: scale(0.95) !important;
   }
 }
 
@@ -40,17 +55,6 @@
     @apply bg-white/80 backdrop-blur-md border border-gold shadow-soft;
     width: 90%;
     max-width: 400px;
-  }
-
-  .royal-btn-feedback {
-    @apply transition-all duration-150;
-  }
-
-  .royal-btn-feedback:active, .royal-btn-feedback:focus {
-    background-color: #002366 !important;
-    color: white !important;
-    box-shadow: 0 0 20px #002366 !important;
-    outline: none;
   }
 }
 
