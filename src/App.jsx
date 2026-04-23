@@ -115,7 +115,7 @@ const GlassCard = ({ children, className = "" }) => (
     animate="visible"
     exit="exit"
     style={{ background: 'rgba(255, 255, 255, 0.4)', backdropFilter: 'blur(12px)' }}
-    className={`border border-[#BC987E]/20 rounded-[2.5rem] py-6 px-4 md:p-10 shadow-2xl w-[92%] max-w-[380px] mx-4 flex flex-col items-center justify-between h-auto max-h-[85vh] overflow-y-auto text-center z-10 my-8 ${className}`}
+    className={`border border-[#BC987E]/20 rounded-[2.5rem] py-4 px-6 md:p-10 shadow-2xl w-[92%] max-w-[380px] mx-4 flex flex-col items-center justify-center h-auto max-h-[85vh] overflow-y-auto text-center z-10 my-8 ${className}`}
   >
     {children}
   </motion.div>
@@ -141,7 +141,7 @@ const MatteButton = ({ onClick, text, icon: Icon, secondary = false, className =
     } : {}}
     transition={!secondary ? { repeat: Infinity, duration: 3, ease: "easeInOut" } : {}}
     onClick={onClick}
-    className={`${secondary ? 'border border-[#BC987E] text-[#BC987E]' : 'bg-[#BC987E] text-white shadow-md'} w-full py-3.5 md:py-4 rounded-full font-montserrat text-[10px] font-bold tracking-[0.4em] uppercase active:bg-[#FFFDF5] active:text-[#D4AF37] active:shadow-[0_0_20px_#D4AF37] transition-all flex items-center justify-center gap-2 touch-manipulation ${className}`}
+    className={`${secondary ? 'border border-[#BC987E] text-[#BC987E]' : 'bg-[#BC987E] text-white shadow-md'} w-full max-w-[280px] py-3 md:py-4 rounded-full font-montserrat text-[10px] font-bold tracking-[0.4em] uppercase active:bg-[#FFFDF5] active:text-[#D4AF37] active:shadow-[0_0_20px_#D4AF37] transition-all flex items-center justify-center gap-2 touch-manipulation ${className}`}
     style={{ WebkitTapHighlightColor: 'transparent' }}
   >
     {text} {Icon && <Icon size={14} className={text.includes('Yes') ? 'fill-white' : ''} />}
@@ -234,7 +234,7 @@ export default function App() {
       {/* Audio Toggle UI */}
       <button 
         onClick={toggleMute}
-        className="fixed top-6 right-6 z-50 p-3 rounded-full bg-white/20 backdrop-blur-md border border-[#BC987E]/30 text-[#BC987E] shadow-lg active:bg-[#FFFDF5] active:text-[#D4AF37] active:shadow-[0_0_20px_#D4AF37] active:scale-95 transition-all touch-manipulation"
+        className="fixed top-6 right-6 z-50 p-3 rounded-full bg-white/20 backdrop-blur-md border border-[#BC987E]/30 text-[#BC987E] shadow-lg active:bg-[#FFFDF5] active:text-[#D4AF37] active:shadow-[0_0_20px_#D4AF37] active:scale-95 transition-all touch-manipulation scale-90"
         style={{ WebkitTapHighlightColor: 'transparent' }}
       >
         {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
@@ -283,7 +283,7 @@ export default function App() {
                 <p className="text-[#BC987E]/60 text-[8px] md:text-[9px] uppercase tracking-[0.4em] font-bold font-montserrat">The Groom Side</p>
                 <div className="text-[#2D2D2D] font-playfair">
                   <p className="text-lg md:text-xl font-bold">Mohamed Sanad</p>
-                  <p className="text-[10px] md:text-xs font-montserrat opacity-70 mt-1 leading-relaxed">Son of Mr. Shamsudheen Vellathur <br/> & Mrs. Jemsheera C.P</p>
+                  <p className="text-sm font-montserrat opacity-70 mt-1 leading-relaxed">Son of Mr. Shamsudheen Vellathur <br/> & Mrs. Jemsheera C.P</p>
                 </div>
               </div>
               <div className="text-[#BC987E] font-dancing text-xl md:text-2xl opacity-40">&</div>
@@ -291,7 +291,7 @@ export default function App() {
                 <p className="text-[#BC987E]/60 text-[8px] md:text-[9px] uppercase tracking-[0.4em] font-bold font-montserrat">The Bride Side</p>
                 <div className="text-[#2D2D2D] font-playfair">
                   <p className="text-lg md:text-xl font-bold">Rafna Shani</p>
-                  <p className="text-[10px] md:text-xs font-montserrat opacity-70 mt-1 leading-relaxed">Daughter of Mr. Ismail <br/> & Mrs. Fathima</p>
+                  <p className="text-sm font-montserrat opacity-70 mt-1 leading-relaxed">Daughter of Mr. Ismail <br/> & Mrs. Fathima</p>
                 </div>
               </div>
             </motion.div>
@@ -344,7 +344,7 @@ export default function App() {
                   <p className="text-[#D4AF37] font-montserrat text-sm leading-relaxed font-bold mb-4 px-4 text-center">
                     {rsvpStatus === 'yes' 
                       ? 'Thank you for your love and blessings!' 
-                      : 'We would be honored by your presence. Please try your best to join us and share in our joy!'
+                      : 'We will miss you! Thank you for your well wishes and for being part of our journey.'
                     }
                   </p>
                   <span className="text-[#D4AF37] font-dancing text-2xl mt-4 block">With Love, Vellathur Family</span>
