@@ -40,27 +40,29 @@ const NextButton = ({ onClick, text = "NEXT" }) => (
 const StationeryLanding = ({ onOpen }) => (
   <div className="flex flex-col items-center justify-center min-h-screen w-full text-center p-6 bg-[#FFFDF5] font-playfair">
     {/* 1. Bismillah */}
-    <div className="text-[#C5A059] text-4xl mb-10 font-serif">﷽</div>
+    <div className="text-[#C5A059] text-3xl mb-8 font-serif">﷽</div>
     
-    {/* 2. S & R Monogram */}
-    <div className="text-[#C5A059] text-xl tracking-[0.7em] mb-4 uppercase opacity-80">
+    {/* 2. Parents' Names */}
+    <div className="text-[#C5A059] text-[9px] md:text-[10px] tracking-[0.3em] uppercase mb-8 font-montserrat opacity-70">
+      <p className="mb-2">Mr. & Mrs. Shamsudheen</p>
+      <p>&</p>
+      <p className="mt-2">Mr. & Mrs. Ismail</p>
+    </div>
+    
+    {/* 3. S & R Monogram */}
+    <div className="text-[#C5A059] text-3xl md:text-4xl tracking-[0.6em] mb-6 uppercase opacity-90">
       S & R
     </div>
     
-    {/* 3. Sanad & Rafna */}
-    <h1 className="text-[#AF8F4F] text-5xl md:text-7xl font-bold mb-8 leading-tight">
+    {/* 4. Sanad & Rafna */}
+    <h1 className="text-[#C5A059] text-5xl md:text-7xl font-bold mb-12 leading-tight">
       Sanad & Rafna
     </h1>
-    
-    {/* 4. Wedding Invitation */}
-    <p className="text-[#C5A059]/70 text-[10px] md:text-xs tracking-[0.6em] uppercase mb-20 font-montserrat font-light">
-      Wedding Invitation
-    </p>
     
     {/* 5. OPEN INVITATION Button */}
     <button 
       onClick={onOpen}
-      className="transition-all duration-100 active:bg-[#002366] active:text-white active:shadow-[0_0_25px_rgba(255,255,255,0.9)] focus:outline-none border border-[#C5A059] text-[#C5A059] px-14 py-4 rounded-full tracking-[5px] text-[10px] font-montserrat uppercase font-bold bg-[#FFFDF5]"
+      className="transition-all duration-100 active:bg-[#002366] active:text-white active:shadow-[0_0_25px_rgba(255,255,255,0.9)] focus:outline-none border border-[#C5A059] text-[#C5A059] px-14 py-4 rounded-full tracking-[5px] text-[10px] font-montserrat uppercase font-bold bg-transparent"
       style={{ WebkitTapHighlightColor: 'transparent' }}
     >
       OPEN INVITATION
