@@ -1,69 +1,95 @@
 @import "tailwindcss";
 
+/* =============================================
+   TAILWIND v4 — All theme tokens live here
+   (tailwind.config.js is NOT used in v4)
+   ============================================= */
 @theme {
-  --color-gold: #D4AF37;
-  --color-warm-almond: #BC987E;
-  --color-ivory-border: #E5D9B6;
-  --color-soft-gold: #C5A059;
-  --color-ivory-solid: #F5F5DC;
-  
-  --font-playfair: "Playfair Display", serif;
-  --font-inter: Inter, sans-serif;
-  --font-bodoni: "Bodoni Moda", serif;
+  /* Colors */
+  --color-gold:           #D4AF37;
+  --color-warm-almond:    #BC987E;
+  --color-ivory-border:   #E5D9B6;
+  --color-soft-gold:      #C5A059;
+  --color-ivory-solid:    #F5F5DC;
+  --color-imperial-navy:  #001220;
+  --color-parchment:      #FDFCF0;
+  --color-champagne:      #F7E7CE;
+  --color-charcoal:       #121212;
+
+  /* Fonts */
+  --font-playfair:  "Playfair Display", serif;
+  --font-inter:     Inter, sans-serif;
+  --font-bodoni:    "Bodoni Moda", serif;
   --font-montserrat: Montserrat, sans-serif;
-  --font-dancing: "Dancing Script", cursive;
-  
+  --font-dancing:   "Dancing Script", cursive;
+
+  /* Shadows */
   --shadow-soft: 0 10px 30px -5px rgba(0, 0, 0, 0.3);
 }
 
-.ivory-glass-btn {
-  background: #D4AF37;
-  color: #FFF;
-  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
-  border: none;
+/* =============================================
+   Global resets
+   ============================================= */
+*, *::before, *::after {
+  -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
 }
 
-/* Force removal of default mobile tap highlights and outlines */
-* {
-  -webkit-tap-highlight-color: transparent !important;
-  outline: none !important;
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: Inter, sans-serif;
+  background: #fff;
 }
 
-@layer base {
-  body {
-    @apply bg-white text-black font-inter overflow-x-hidden;
-  }
-
-  /* Global Button Force-Apply */
-  button {
-    transition: background-color 0.2s ease, box-shadow 0.2s ease !important;
-  }
-
-  button:active, 
-  button:focus {
-    background-color: #FFFDF5 !important;
-    color: #D4AF37 !important;
-    box-shadow: 0 0 20px #D4AF37 !important;
-    transform: none !important;
-  }
+/* Remove default focus ring globally (we style it ourselves) */
+:focus {
+  outline: none;
 }
 
-@layer components {
-  .glass-card {
-    background: rgba(255, 255, 255, 0.4);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 2.5rem;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-    width: 92%;
-    max-width: 380px;
-    padding: 2.5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1.5rem; /* gap-y-6 */
-    text-align: center;
-  }
+/* =============================================
+   Button active / focus feedback (Royal Blue)
+   ============================================= */
+button {
+  transition: background-color 0.15s ease, box-shadow 0.15s ease, color 0.15s ease;
+  cursor: pointer;
+}
+
+button:active {
+  background-color: #002366 !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 20px rgba(0, 35, 102, 0.6) !important;
+}
+
+/* =============================================
+   Utility classes
+   ============================================= */
+.glass-card {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 2.5rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  width: 92%;
+  max-width: 380px;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  text-align: center;
+}
+
+/* Fade-in-up animation */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
 }

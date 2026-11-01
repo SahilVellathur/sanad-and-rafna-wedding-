@@ -35,11 +35,11 @@ const useCountdown = (targetDate) => {
 
 const GlassCard = ({ children, className = "" }) => (
   <motion.div 
-    initial={{ opacity: 0, y: 0 }}
+    initial={{ opacity: 0, y: 24 }}
     animate={{ opacity: 1, y: 0 }}
-    exit={{ opacity: 0, y: 0 }}
-    transition={{ duration: 0.5 }}
-    className={`bg-white/40 backdrop-blur-md border border-white/20 rounded-[2.5rem] p-8 md:p-10 shadow-2xl w-[92%] max-w-[380px] flex flex-col items-center justify-center gap-y-6 text-center z-10 max-h-[90dvh] overflow-y-auto ${className}`}
+    exit={{ opacity: 0, y: -24 }}
+    transition={{ duration: 0.45, ease: "easeOut" }}
+    className={`glass-card ${className}`}
   >
     {children}
   </motion.div>
@@ -59,10 +59,10 @@ const PaginationDots = ({ current, total }) => (
 const MatteButton = ({ onClick, text, icon: Icon, secondary = false, className = "" }) => (
   <button 
     onClick={onClick}
-    className={`${secondary ? 'border border-[#BC987E] text-[#BC987E]' : 'bg-[#BC987E] text-white shadow-md'} w-full max-w-[280px] py-3 md:py-4 rounded-full font-montserrat text-[10px] font-bold tracking-[0.4em] uppercase transition-all flex items-center justify-center gap-2 touch-manipulation active:bg-[#FFFDF5] active:text-[#D4AF37] active:shadow-[0_0_20px_#D4AF37] ${className}`}
+    className={`${secondary ? 'border border-[#BC987E] text-[#BC987E] bg-transparent' : 'bg-[#BC987E] text-white shadow-md'} w-full max-w-[280px] py-3 md:py-4 rounded-full font-montserrat text-[10px] font-bold tracking-[0.4em] uppercase transition-all flex items-center justify-center gap-2 touch-manipulation ${className}`}
     style={{ WebkitTapHighlightColor: 'transparent' }}
   >
-    {text} {Icon && <Icon size={14} className={text.includes('Yes') ? 'fill-white' : ''} />}
+    {text} {Icon && <Icon size={14} />}
   </button>
 );
 
@@ -112,7 +112,7 @@ export default function App() {
 
   return (
     <div 
-      className="min-h-[100dvh] w-full flex flex-col items-center justify-center bg-cover bg-center bg-no-repeat p-4 relative overflow-hidden bg-fixed"
+      className="min-h-[100dvh] w-full flex flex-col items-center justify-center bg-cover bg-center bg-no-repeat relative overflow-hidden"
       style={{ backgroundImage: 'url(/assets/bg.png)' }}
     >
       <div className="absolute inset-0 bg-black/[0.02] pointer-events-none"></div>
